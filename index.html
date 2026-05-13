@@ -5,40 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAPTORU_ - Creative Studio</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f0f;color:#fff;font-family:'Segoe UI',Arial,sans-serif;line-height:1.6}header{background:linear-gradient(135deg,#1a1a1a 0%,#2a1a1a 100%);padding:60px 20px;text-align:center;border-bottom:3px solid #ff6b00}header h1{font-size:3.5rem;margin:20px 0;background:linear-gradient(135deg,#fff,#ff6b00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}header p{font-size:1.1rem;color:#aaa;margin:10px 0}.nav{max-width:1200px;margin:30px auto 0;display:flex;justify-content:center;gap:30px;flex-wrap:wrap}.nav button{background:transparent;color:#fff;border:2px solid #ff6b00;padding:10px 20px;cursor:pointer;border-radius:5px;font-size:1rem;transition:all 0.3s;font-weight:bold}. nav button:hover,.nav button.active{background:#ff6b00;color:#000}main{max-width:1400px;margin:0 auto;padding:40px 20px}.section{display:none}.section.active{display:block;animation:fadeIn 0.5s}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.section-title{font-size:2rem;margin:40px 0 30px;color:#ff6b00;border-bottom:2px solid #ff6b00;padding-bottom:10px}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;margin:30px 0}.card{background:#1a1a1a;border:1px solid #333;border-radius:8px;overflow:hidden;cursor:pointer;transition:all 0.3s;position:relative}.card:hover{border-color:#ff6b00;transform:translateY(-5px);box-shadow:0 10px 30px rgba(255,107,0,0.2)}.card-img{width:100%;height:180px;object-fit:cover;display:block}.card-label{padding:12px;font-size:0.85rem;color:#aaa;text-align:center;background:#0f0f0f;border-top:1px solid #333}#lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;flex-direction:column}#lightbox.active{display:flex}#lightbox img,#lightbox video{max-width:90%;max-height:85%;border:2px solid #ff6b00;border-radius:8px;object-fit:contain}.lightbox-close{position:absolute;top:20px;right:30px;font-size:2.5rem;color:#fff;cursor:pointer;background:none;border:none;z-index:10000}.contact{background:#1a1a1a;padding:40px;border-radius:8px;max-width:600px;margin:60px auto;border:2px solid #ff6b00}.contact h2{color:#ff6b00;margin-bottom:20px}.contact input,.contact textarea{width:100%;padding:12px;margin:15px 0;background:#0f0f0f;border:1px solid #333;color:#fff;border-radius:5px;font-family:inherit}. contact input:focus,.contact textarea:focus{outline:none;border-color:#ff6b00;box-shadow:0 0 10px rgba(255,107,0,0.3)}.contact textarea{resize:vertical;min-height:120px}.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.btn{padding:12px;border:2px solid #ff6b00;background:transparent;color:#ff6b00;cursor:pointer;border-radius:5px;font-weight:bold;transition:all 0.3s;font-size:1rem}.btn:hover{background:#ff6b00;color:#000}.btn:disabled{opacity:0.5;cursor:not-allowed}#status{margin-top:15px;padding:10px;border-radius:5px;text-align:center;display:none}.status-success{background:rgba(76,175,80,0.2);color:#4caf50;border:1px solid #4caf50}.status-error{background:rgba(244,67,54,0.2);color:#f44336;border:1px solid #f44336}footer{background:#1a1a1a;padding:30px;text-align:center;margin-top:60px;border-top:2px solid #ff6b00;color:#aaa}@media(max-width:768px){header h1{font-size:2rem}.nav{gap:15px}.nav button{padding:8px 15px;font-size:0.9rem}.gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.btn-group{grid-template-columns:1fr}}</style>
+        *{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;line-height:1.6}header{position:relative;height:400px;background:linear-gradient(135deg,#0a0a0a 0%,#1a0a0a 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:3px solid #00d4d4}.header-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('images/test bannière discord.png');background-size:cover;background-position:center;opacity:0.3;z-index:0}.header-content{position:relative;z-index:2;text-align:center}.profile-pic{width:150px;height:150px;border-radius:50%;border:4px solid #00d4d4;object-fit:cover;margin:0 auto 20px;box-shadow:0 0 40px rgba(0,212,212,0.4)}.header-title{font-size:3rem;margin:15px 0;background:linear-gradient(135deg,#fff,#00d4d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.header-subtitle{font-size:1.1rem;color:#00d4d4;margin:10px 0}.header-desc{font-size:0.95rem;color:#aaa;margin-top:10px}.nav{max-width:1200px;margin:30px auto;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding:0 20px}.nav button{background:transparent;color:#00d4d4;border:2px solid #00d4d4;padding:10px 20px;cursor:pointer;border-radius:5px;font-size:1rem;transition:all 0.3s;font-weight:bold}.nav button:hover,.nav button.active{background:#00d4d4;color:#0a0a0a}main{max-width:1400px;margin:0 auto;padding:40px 20px}.section{display:none}.section.active{display:block;animation:fadeIn 0.5s}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.section-title{font-size:2.2rem;margin:50px 0 30px;color:#00d4d4;border-bottom:3px solid #00d4d4;padding-bottom:15px;text-transform:uppercase;letter-spacing:2px}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin:30px 0}.card{background:#1a1a1a;border:2px solid #333;border-radius:8px;overflow:hidden;cursor:pointer;transition:all 0.3s;position:relative}.card:hover{border-color:#00d4d4;transform:translateY(-8px);box-shadow:0 15px 40px rgba(0,212,212,0.25)}.card-img{width:100%;height:180px;object-fit:cover;display:block;background:#0a0a0a}.card img{width:100%;height:100%;object-fit:cover}.card video{width:100%;height:100%;object-fit:cover}.card-label{padding:12px;font-size:0.8rem;color:#aaa;text-align:center;background:#0f0f0f;border-top:1px solid #333;word-break:break-word}#lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:9999;align-items:center;justify-content:center;flex-direction:column}#lightbox.active{display:flex}#lightbox img,#lightbox video{max-width:90%;max-height:85%;border:3px solid #00d4d4;border-radius:8px;object-fit:contain}.lightbox-close{position:absolute;top:20px;right:30px;font-size:2.5rem;color:#00d4d4;cursor:pointer;background:none;border:none;z-index:10000;transition:all 0.3s}.lightbox-close:hover{transform:rotate(90deg);text-shadow:0 0 10px rgba(0,212,212,0.5)}.contact{background:#1a1a1a;padding:40px;border-radius:8px;max-width:600px;margin:60px auto;border:2px solid #00d4d4}.contact h2{color:#00d4d4;margin-bottom:20px;font-size:1.8rem}.contact input,.contact textarea{width:100%;padding:12px;margin:15px 0;background:#0f0f0f;border:1px solid #333;color:#fff;border-radius:5px;font-family:inherit}.contact input:focus,.contact textarea:focus{outline:none;border-color:#00d4d4;box-shadow:0 0 15px rgba(0,212,212,0.3)}.contact textarea{resize:vertical;min-height:120px}.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.btn{padding:12px;border:2px solid #00d4d4;background:transparent;color:#00d4d4;cursor:pointer;border-radius:5px;font-weight:bold;transition:all 0.3s;font-size:1rem}.btn:hover{background:#00d4d4;color:#0a0a0a}.btn:disabled{opacity:0.5;cursor:not-allowed}#status{margin-top:15px;padding:10px;border-radius:5px;text-align:center;display:none}.status-success{background:rgba(0,212,212,0.2);color:#00d4d4;border:1px solid #00d4d4}.status-error{background:rgba(244,67,54,0.2);color:#f44336;border:1px solid #f44336}footer{background:#1a1a1a;padding:30px;text-align:center;margin-top:60px;border-top:2px solid #00d4d4;color:#aaa}footer a{color:#00d4d4;text-decoration:none;margin:0 10px}.empty-message{text-align:center;padding:40px;color:#666;font-style:italic}@media(max-width:768px){header{height:300px}.header-title{font-size:2rem}.profile-pic{width:120px}.nav{gap:10px}.nav button{padding:8px 15px;font-size:0.9rem}.gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.btn-group{grid-template-columns:1fr}}
+    </style>
 </head>
 <body>
     <header>
-        <h1>RAPTORU_</h1>
-        <p>Animateur 2D • Motion Designer • Graphiste</p>
-        <p style="font-size:0.9rem;color:#ff6b00;margin-top:15px;">Créatrice de contenu • Disponible pour commandes</p>
-        <div class="nav">
-            <button class="active" onclick="showSection('portfolio')">Portfolio</button>
-            <button onclick="showSection('contact')">Contact</button>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <img src="images/Coqueline Discord.png" class="profile-pic" alt="RAPTORU_" onerror="this.style.display='none'">
+            <h1 class="header-title">RAPTORU_</h1>
+            <p class="header-subtitle">Animateur 2D • Motion Designer • Graphiste</p>
+            <p class="header-desc">Créatrice de contenu • Disponible pour commandes</p>
         </div>
     </header>
 
+    <div class="nav">
+        <button class="active" onclick="showSection(event, 'portfolio')">Portfolio</button>
+        <button onclick="showSection(event, 'contact')">Contact</button>
+    </div>
+
     <main>
-        <!-- PORTFOLIO SECTION -->
         <div id="portfolio" class="section active">
-            <!-- BADGES -->
             <div class="section-title">🎨 Badges</div>
             <div class="gallery" id="badgesGallery"></div>
 
-            <!-- EMOTES -->
             <div class="section-title">😊 Emotes</div>
             <div class="gallery" id="emotesGallery"></div>
 
-            <!-- MOTION DESIGN -->
             <div class="section-title">✨ Motion Design</div>
             <div class="gallery" id="motionGallery"></div>
 
-            <!-- GALERIE -->
             <div class="section-title">🖼️ Galerie</div>
             <div class="gallery" id="galleryGallery"></div>
         </div>
 
-        <!-- CONTACT SECTION -->
         <div id="contact" class="section">
             <div class="contact">
                 <h2>Envoyez-moi un message</h2>
@@ -65,8 +65,8 @@
     <footer>
         <p><strong>RAPTORU_</strong> - Créatrice de contenu</p>
         <p style="margin-top:15px;">
-            <a href="https://twitch.tv/raptorutwitch" style="color:#ff6b00;text-decoration:none;margin:0 10px;">Twitch</a>
-            <a href="https://tiktok.com" style="color:#ff6b00;text-decoration:none;margin:0 10px;">TikTok</a>
+            <a href="https://twitch.tv/raptorutwitch">Twitch</a>
+            <a href="https://tiktok.com">TikTok</a>
         </p>
         <p style="margin-top:20px;font-size:0.85rem;">© 2024 Raptoru_</p>
     </footer>
@@ -74,68 +74,119 @@
     <script>
         const WEBHOOK = 'https://discord.com/api/webhooks/1503918156022808597/Bks1v2ZFlVTMPD2liRIBouvWNZmjgreyp9EjCwWKtnppcXp0h0zwFTUYQQoQsGvo-Bpw';
 
-        // Pattern matching pour catégoriser les fichiers
-        const patterns = {
-            badges: ['UglyTitan', 'CartTitan', 'ArmoredTitan', 'ColossalTitan', 'BeastTitan', 'Nhs', 'Pablo'],
-            emotes: ['Pog', 'Flex', 'Roooh', 'Grrr', 'Raptor', 'AhooV2', 'Kirby', 'Boude', 'HelloKnight', 'Bobombe', 'Waaah', 'Jaune', 'Bleu', 'Rose', 'rouge'],
-            motion: ['Alerte', 'Transition', 'Cercle', 'Rectangle', 'Pixel', 'Appareil', 'Starting', 'Ending', 'Nuage', 'Video', 'Asset', 'Arrow', 'Dofus', 'CSC', 'Intermission', 'Waterbending', 'Rick', 'RB', 'Eeau', 'Cam', 'Page', 'Just', 'Jerry', 'Template', 'Feu', '[NHS]'],
-            gallery: ['C21', 'Mikasa', 'Daki', 'Ayanokoji', 'Coqueline', 'Qilby', 'Avatar', 'bannière']
+        const files = {
+            badges: [
+                '1. UglyTitan.png',
+                '2. CartTtian.png',
+                '5. ArmoredTitan.png',
+                '6. ColossalTitan.png',
+                '7. BeastTitan.png',
+                'Bleu.png',
+                'Jaune.png',
+                'Rose.png',
+                'rouge.png'
+            ],
+            emotes: [
+                'Pog.png',
+                'Waaah.png',
+                'Flex megumin.png',
+                'Roooh.png',
+                'Grrr séance UV.png',
+                'Raptor sadge Fixed.png',
+                'AhooV2.gif',
+                'Kirby_Fixed.gif',
+                'Boude.gif',
+                'HelloKnight_.gif',
+                'Bobombe Finale.gif'
+            ],
+            motion: [
+                'Alerte raid exemple.mp4',
+                'Appareil photo exemple 2.mp4',
+                'Arrow Exemple.mp4',
+                'Asset sub.mp4',
+                'Cercle exemple.mp4',
+                'CSC.mp4',
+                'Dofus Alerte.mp4',
+                'Eeau Anim.mp4',
+                'Ending Screen fixed.mp4',
+                'Intermission.mp4',
+                'Jerry Smith.mp4',
+                'Just Chatting.mp4',
+                'Nuage Classique.mp4',
+                'Nuage Rouge.mp4',
+                'Page exemple.mp4',
+                'Pixel Exemple.mp4',
+                'RB Classic.mp4',
+                'Rectangle.mp4',
+                'Rick&Morty_1.mp4',
+                'Starting Screen.mp4',
+                'Template Alerte follow.mp4',
+                'Transition Feu.mp4',
+                'Video Terre.mp4',
+                'Video Wind.mp4',
+                'Vidéo Eau.mp4',
+                '[NHS] Alerte Follow Final.mp4'
+            ],
+            gallery: [
+                'C21 Gif.gif',
+                'Mikasa TTS.gif',
+                'Daki.png',
+                'Ayanokoji PPClair.png',
+                'Coqueline Discord.png',
+                'Qilby Avatar 3 .png',
+                '1 an.png',
+                '3.png',
+                '4.png',
+                '5Flashy.png',
+                '1Racine et détruit.png',
+                '2Abimé et sale.png'
+            ]
         };
 
-        async function loadImages() {
-            try {
-                // Charge les images depuis les dossiers
-                const imageFiles = await getFilesFromFolder('images');
-                const videoFiles = await getFilesFromFolder('videos');
-                
-                categorizeAndDisplay(imageFiles, videoFiles);
-            } catch (e) {
-                console.log('Chargement dynamique non disponible, utilisation des patterns');
-                loadWithPatterns();
+        function createCard(filename, isVideo) {
+            const folder = isVideo ? 'videos' : 'images';
+            const src = folder + '/' + filename;
+            
+            if (isVideo) {
+                return `<div class="card" onclick="openLightbox('${src}', true)"><video style="width:100%;height:180px;object-fit:cover;"><source src="${src}"></video><div class="card-label">${filename}</div></div>`;
+            } else {
+                return `<div class="card" onclick="openLightbox('${src}', false)"><img src="${src}" class="card-img" alt="${filename}" onerror="this.parentElement.style.opacity='0.5'"><div class="card-label">${filename}</div></div>`;
             }
         }
 
-        function loadWithPatterns() {
-            // Fallback: charge basé sur les patterns
+        function loadGallery() {
             const imagePath = 'images/';
             const videoPath = 'videos/';
 
             // Badges
             let badgesHtml = '';
-            ['1. UglyTitan.png', '2. CartTtian.png', '5. ArmoredTitan.png', '6. ColossalTitan.png', '7. BeastTitan.png', 'Badge NhsBlanc.png', 'Badge NhsBleu.png', 'Badge NhsJaune.png', 'Badge NhsRose.png', 'Badge Nhsrouge.png'].forEach(f => {
-                badgesHtml += createCard(imagePath + f, f);
+            files.badges.forEach(f => {
+                badgesHtml += createCard(f, false);
             });
-            document.getElementById('badgesGallery').innerHTML = badgesHtml;
+            document.getElementById('badgesGallery').innerHTML = badgesHtml || '<div class="empty-message">Aucun badge trouvé</div>';
 
             // Emotes
             let emotesHtml = '';
-            ['Pog.png', 'Waaah.png', 'Flex megumin.png', 'Roooh.png', 'Grrr séance UV.png', 'Raptor sadge Fixed.png', 'AhooV2.gif', 'Kirby_Fixed.gif', 'Boude.gif', 'HelloKnight_.gif', 'Bobombe Finale.gif'].forEach(f => {
-                emotesHtml += createCard(imagePath + f, f);
+            files.emotes.forEach(f => {
+                const isVideo = f.endsWith('.gif');
+                emotesHtml += createCard(f, isVideo);
             });
-            document.getElementById('emotesGallery').innerHTML = emotesHtml;
+            document.getElementById('emotesGallery').innerHTML = emotesHtml || '<div class="empty-message">Aucune emote trouvée</div>';
 
             // Motion
             let motionHtml = '';
-            ['Alerte raid exemple.mp4', 'Appareil photo exemple 2.mp4', 'Cercle exemple.mp4', 'Pixel Exemple.mp4', 'Rectangle.mp4', 'Starting Screen.mp4', 'Ending Screen fixed.mp4', 'Nuage Classique.mp4', 'Video Terre.mp4', 'Video Wind.mp4', 'Vidéo Eau.mp4', 'Transition Feu.mp4', 'Dofus Alerte.mp4', 'Rick&Morty_1.mp4'].forEach(f => {
-                motionHtml += createCard(videoPath + f, f);
+            files.motion.forEach(f => {
+                motionHtml += createCard(f, true);
             });
-            document.getElementById('motionGallery').innerHTML = motionHtml;
+            document.getElementById('motionGallery').innerHTML = motionHtml || '<div class="empty-message">Aucune vidéo trouvée</div>';
 
             // Galerie
             let gallerieHtml = '';
-            ['C21 Gif.gif', 'Mikasa TTS.gif', 'Filigraned Daki.png', 'Filigraned Ayanokoji.png', 'Coqueline Filigraned.png', 'Qilby Filigraned.png', 'Avatar.mp4'].forEach(f => {
-                const path = f.endsWith('.mp4') ? videoPath : imagePath;
-                gallerieHtml += createCard(path + f, f);
+            files.gallery.forEach(f => {
+                const isVideo = f.endsWith('.mp4');
+                gallerieHtml += createCard(f, isVideo);
             });
-            document.getElementById('galleryGallery').innerHTML = gallerieHtml;
-        }
-
-        function createCard(src, name) {
-            const isVideo = src.endsWith('.mp4') || src.endsWith('.webm');
-            const html = isVideo 
-                ? `<div class="card" onclick="openLightbox('${src}', true)"><video style="width:100%;height:180px;object-fit:cover;" src="${src}"></video><div class="card-label">${name}</div></div>`
-                : `<div class="card" onclick="openLightbox('${src}', false)"><img src="${src}" class="card-img" onerror="this.style.display='none'"><div class="card-label">${name}</div></div>`;
-            return html;
+            document.getElementById('galleryGallery').innerHTML = gallerieHtml || '<div class="empty-message">Aucune image trouvée</div>';
         }
 
         function openLightbox(src, isVideo) {
@@ -160,11 +211,11 @@
             document.getElementById('lightboxVideo').pause();
         }
 
-        function showSection(id) {
+        function showSection(e, id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            e.target.classList.add('active');
         }
 
         function sendDiscord() {
@@ -183,7 +234,7 @@
                 body: JSON.stringify({
                     embeds: [{
                         title: '📩 Nouveau Contact',
-                        color: 16744192,
+                        color: 55508,
                         fields: [
                             { name: 'Nom', value: name, inline: true },
                             { name: 'Email', value: email, inline: true },
@@ -221,8 +272,7 @@
             setTimeout(() => status.style.display = 'none', 3000);
         }
 
-        // Charge au démarrage
-        loadWithPatterns();
+        loadGallery();
     </script>
 </body>
 </html>
