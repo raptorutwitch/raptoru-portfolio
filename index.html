@@ -3,33 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPTORU_Test4 - Creative Studio</title>
+    <title>RAPTORU_Test5 - Creative Studio</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{--accent:#00d4d4;--bg:#050505;--card:#111;--border:#1a1a1a;--text:#e0e0e0;--dim:#666}
-        body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif}
+        body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
         ::selection{background:var(--accent);color:#000}
 
-        /* HEADER */
-        header{position:relative;height:100vh;max-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-        .header-bg{position:absolute;inset:0;background:url('images/test bannière discord.png') center/cover;opacity:0.25;filter:blur(2px)}
-        .header-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0.3) 0%,rgba(5,5,5,0.8) 70%,var(--bg) 100%)}
+        /* ANIMATED BG */
+        .bg-pulse{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+        .bg-pulse .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.06;animation:drift 25s ease-in-out infinite}
+        .bg-pulse .orb:nth-child(1){width:600px;height:600px;background:var(--accent);top:-10%;left:20%;animation-delay:0s}
+        .bg-pulse .orb:nth-child(2){width:400px;height:400px;background:var(--accent);bottom:10%;right:10%;animation-delay:-8s;animation-duration:30s}
+        .bg-pulse .orb:nth-child(3){width:300px;height:300px;background:#0088aa;top:50%;left:60%;animation-delay:-15s;animation-duration:20s}
+        @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(40px,-30px) scale(1.1)}50%{transform:translate(-20px,50px) scale(0.95)}75%{transform:translate(30px,20px) scale(1.05)}}
+
+        /* Fine grid overlay */
+        .bg-grid{position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(0,212,212,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,212,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+
+        /* HEADER - PARALLAX */
+        header{position:relative;height:100vh;max-height:750px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        .header-bg{position:absolute;inset:-50px;background:url('images/test bannière discord.png') center/cover;opacity:0.25;filter:blur(2px);will-change:transform}
+        .header-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0.2) 0%,rgba(5,5,5,0.7) 60%,var(--bg) 100%)}
         .header-content{position:relative;z-index:2;text-align:center;padding:0 20px}
-        .profile-pic{width:130px;height:130px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;box-shadow:0 0 40px rgba(0,212,212,0.3);animation:fadeUp 0.8s ease}
+        .profile-pic{width:180px;height:180px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;box-shadow:0 0 60px rgba(0,212,212,0.35);animation:fadeUp 0.8s ease;transition:box-shadow 0.5s}
+        .profile-pic:hover{box-shadow:0 0 80px rgba(0,212,212,0.5)}
         @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        .header-content h1{font-size:clamp(2.5rem,8vw,4.5rem);font-weight:900;letter-spacing:-2px;margin:20px 0 10px;background:linear-gradient(135deg,#fff 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp 0.8s ease 0.1s both}
+        .header-content h1{font-size:clamp(2.8rem,8vw,5rem);font-weight:900;letter-spacing:-2px;margin:25px 0 12px;background:linear-gradient(135deg,#fff 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp 0.8s ease 0.1s both}
         .tagline{font-size:1rem;color:var(--accent);letter-spacing:3px;text-transform:uppercase;font-weight:600;animation:fadeUp 0.8s ease 0.2s both}
         .bio{font-size:0.9rem;color:var(--dim);margin-top:12px;animation:fadeUp 0.8s ease 0.3s both}
-        .header-cta{margin-top:30px;display:flex;gap:15px;justify-content:center;animation:fadeUp 0.8s ease 0.4s both}
-        .header-cta a{padding:10px 25px;border:1.5px solid var(--accent);color:var(--accent);text-decoration:none;border-radius:4px;font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
+        .header-cta{margin-top:35px;display:flex;gap:15px;justify-content:center;animation:fadeUp 0.8s ease 0.4s both}
+        .header-cta a{padding:10px 28px;border:1.5px solid var(--accent);color:var(--accent);text-decoration:none;border-radius:4px;font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
         .header-cta a:hover{background:var(--accent);color:#000}
         .header-cta a.filled{background:var(--accent);color:#000}
         .header-cta a.filled:hover{background:transparent;color:var(--accent)}
         .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;animation:bounce 2s infinite}
         @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
-        /* NAV */
-        .sticky-nav{position:sticky;top:0;z-index:100;background:rgba(5,5,5,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 0}
+        /* STICKY NAV */
+        .sticky-nav{position:sticky;top:0;z-index:100;background:rgba(5,5,5,0.92);backdrop-filter:blur(25px);border-bottom:1px solid var(--border);padding:12px 0}
         .sticky-nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:8px;padding:0 20px;flex-wrap:wrap}
         .sticky-nav button{background:transparent;color:var(--dim);border:none;padding:8px 16px;cursor:pointer;font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;border-radius:3px}
         .sticky-nav button:hover{color:var(--accent)}
@@ -41,34 +53,40 @@
         .page.active{display:block}
 
         /* SECTION HEADERS */
-        .cat-header{margin:60px 0 25px;display:flex;align-items:center;gap:15px}
-        .cat-header h2{font-size:1.1rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);font-weight:700}
+        .cat-header{margin:70px 0 25px;display:flex;align-items:center;gap:15px}
+        .cat-header h2{font-size:1.1rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);font-weight:700;white-space:nowrap}
         .cat-header .line{flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
         .sub-header{margin:25px 0 15px;font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:600;padding-left:2px}
 
         /* GRIDS */
-        .grid-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-bottom:30px}
-        .grid-md{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:30px}
+        .grid-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-bottom:30px;position:relative}
+        .grid-md{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:30px}
         .grid-lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;margin-bottom:30px}
 
+        /* BADGE GLOW EFFECT */
+        .grid-sm{--glow-x:0;--glow-opacity:0}
+        .grid-sm::before{content:'';position:absolute;top:-10px;bottom:-10px;left:var(--glow-x);width:120px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,212,212,0.12),transparent 70%);opacity:var(--glow-opacity);pointer-events:none;transition:opacity 0.6s ease;z-index:0}
+
         /* CARDS */
-        .card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.25s ease;position:relative}
-        .card:hover{border-color:rgba(0,212,212,0.4);transform:translateY(-4px);box-shadow:0 8px 25px rgba(0,212,212,0.15)}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.25s ease;position:relative;z-index:1}
+        .card:hover{border-color:rgba(0,212,212,0.4);transform:translateY(-4px);box-shadow:0 8px 25px rgba(0,212,212,0.12)}
         .card-media{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#0a0a0a}
         .card-sm .card-media{aspect-ratio:1/1}
         .card-label{padding:8px 10px;font-size:0.65rem;color:var(--dim);text-align:center;letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-        .card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,212,212,0.05));opacity:0;transition:opacity 0.3s;pointer-events:none}
+        .card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,212,212,0.04));opacity:0;transition:opacity 0.3s;pointer-events:none}
         .card:hover::after{opacity:1}
 
-        /* Progress bar on hover */
-        .preview-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0;transition:none;z-index:5}
+        /* Preview bar */
+        .preview-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0;z-index:5}
 
         /* LIGHTBOX */
         #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:9999;align-items:center;justify-content:center}
         #lightbox.active{display:flex}
-        #lightbox img,#lightbox video{max-width:92%;max-height:88%;border-radius:6px;object-fit:contain}
-        .lb-close{position:absolute;top:15px;right:20px;font-size:1.8rem;color:var(--dim);cursor:pointer;background:none;border:none;transition:all 0.2s;z-index:10000;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+        #lightbox img,#lightbox video{max-width:92%;max-height:85%;border-radius:6px;object-fit:contain}
+        .lb-close{position:absolute;top:15px;right:20px;font-size:1.8rem;color:var(--dim);cursor:pointer;background:none;border:none;transition:all 0.2s;z-index:10001;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
         .lb-close:hover{color:#fff;background:rgba(255,255,255,0.1)}
+        .lb-mute{position:absolute;bottom:20px;right:20px;background:rgba(0,212,212,0.2);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;z-index:10001;transition:all 0.3s}
+        .lb-mute:hover{background:var(--accent);color:#000}
 
         /* CONTACT */
         .contact-wrap{max-width:500px;margin:60px auto;padding:35px;background:var(--card);border:1px solid var(--border);border-radius:8px}
@@ -96,18 +114,26 @@
         .reveal.visible{opacity:1;transform:translateY(0)}
 
         @media(max-width:768px){
-            header{max-height:500px}
-            .profile-pic{width:100px;height:100px}
+            header{max-height:550px}
+            .profile-pic{width:140px;height:140px}
             .grid-sm{grid-template-columns:repeat(auto-fill,minmax(70px,1fr))}
-            .grid-md{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+            .grid-md{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
             .grid-lg{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
             .btn-row{grid-template-columns:1fr}
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-bg"></div>
+    <!-- Animated background -->
+    <div class="bg-pulse">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    <div class="bg-grid"></div>
+
+    <header id="hero">
+        <div class="header-bg" id="parallaxBg"></div>
         <div class="header-gradient"></div>
         <div class="header-content">
             <img src="images/Coqueline Discord.png" class="profile-pic" alt="RAPTORU_">
@@ -131,24 +157,20 @@
 
     <main>
         <div id="portfolio" class="page active">
-
-            <!-- BADGES -->
             <div class="cat-header reveal"><h2>Badges</h2><div class="line"></div></div>
             <div class="sub-header reveal">Évolutif</div>
-            <div class="grid-sm reveal" id="g-badges-evo"></div>
+            <div class="grid-sm reveal" id="g-badges-evo" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
             <div class="sub-header reveal">Couleur</div>
-            <div class="grid-sm reveal" id="g-badges-col"></div>
+            <div class="grid-sm reveal" id="g-badges-col" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
             <div class="sub-header reveal">Différents</div>
-            <div class="grid-sm reveal" id="g-badges-diff"></div>
+            <div class="grid-sm reveal" id="g-badges-diff" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
 
-            <!-- EMOTES -->
             <div class="cat-header reveal"><h2>Emotes</h2><div class="line"></div></div>
             <div class="sub-header reveal">Fixe</div>
-            <div class="grid-sm reveal" id="g-emotes-fix"></div>
+            <div class="grid-sm reveal" id="g-emotes-fix" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
             <div class="sub-header reveal">Animée</div>
-            <div class="grid-sm reveal" id="g-emotes-anim"></div>
+            <div class="grid-sm reveal" id="g-emotes-anim" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
 
-            <!-- ASSET TWITCH -->
             <div class="cat-header reveal"><h2>Asset Twitch</h2><div class="line"></div></div>
             <div class="sub-header reveal">Overlay</div>
             <div class="grid-md reveal" id="g-overlay"></div>
@@ -161,18 +183,15 @@
             <div class="sub-header reveal">Alerte Sub</div>
             <div class="grid-md reveal" id="g-sub"></div>
 
-            <!-- ALERTES ANIMEES -->
             <div class="cat-header reveal"><h2>Alertes Animées</h2><div class="line"></div></div>
             <div class="grid-md reveal" id="g-alertes-anim"></div>
 
-            <!-- TRANSITIONS -->
             <div class="cat-header reveal"><h2>Transitions</h2><div class="line"></div></div>
             <div class="sub-header reveal">Motion Design</div>
             <div class="grid-md reveal" id="g-trans-motion"></div>
             <div class="sub-header reveal">Transition Animée</div>
             <div class="grid-md reveal" id="g-trans-anim"></div>
 
-            <!-- GALERIE -->
             <div class="cat-header reveal"><h2>Galerie</h2><div class="line"></div></div>
             <div class="grid-lg reveal" id="g-gallery"></div>
         </div>
@@ -197,8 +216,9 @@
 
     <div id="lightbox" onclick="if(event.target.id==='lightbox')closeLB()">
         <button class="lb-close" onclick="closeLB()">&times;</button>
+        <button class="lb-mute" id="muteBtn" onclick="toggleMute()" style="display:none">🔇 Son</button>
         <img id="lbImg" style="display:none">
-        <video id="lbVid" style="display:none" controls loop></video>
+        <video id="lbVid" style="display:none" controls loop muted></video>
     </div>
 
     <footer>
@@ -226,7 +246,7 @@
             sub:['Jerry Smith.mp4'],
             alertesAnim:['Rick&Morty_1.mp4','Eeau Anim.mp4','RB Classic.mp4','Nuage Classique.mp4','Nuage Rouge.mp4','CSC.mp4'],
             transMotion:['Appareil photo exemple 2.mp4','Cercle exemple.mp4','Page exemple.mp4','Pixel Exemple.mp4','Rectangle.mp4'],
-            transAnim:['transi portail.mp4','Transi snk.mp4','Transition Feu.mp4','Video Terre.mp4','Video Wind.mp4','Vidéo Eau.mp4'],
+            transAnim:['transi portail.mp4','Transi  snk.mp4','Transition Feu.mp4','Video Terre.mp4','Video Wind.mp4','Vidéo Eau.mp4'],
             gallery:['test bannière discord.png','C21TTS.gif','Mikasatts.gif','Daki.png','Ayanokoji PPClair.png','Coqueline Discord.png','Qilby Avatar 3 .png']
         };
 
@@ -258,18 +278,41 @@
             fill('g-trans-anim',F.transAnim,'md');
             fill('g-gallery',F.gallery,'lg');
             initReveal();
+            initParallax();
         }
 
-        // Preview on hover - YouTube style scrubbing for videos >30s
+        // GLOW effect on badge grids
+        function glowMove(e,grid){
+            const rect=grid.getBoundingClientRect();
+            const x=e.clientX-rect.left;
+            grid.style.setProperty('--glow-x',x+'px');
+            grid.style.setProperty('--glow-opacity','1');
+        }
+        function glowOut(grid){
+            grid.style.setProperty('--glow-opacity','0');
+        }
+
+        // PARALLAX
+        function initParallax(){
+            const bg=document.getElementById('parallaxBg');
+            window.addEventListener('scroll',()=>{
+                const scrolled=window.pageYOffset;
+                const header=document.getElementById('hero');
+                if(scrolled<header.offsetHeight){
+                    bg.style.transform='translateY('+scrolled*0.3+'px)';
+                }
+            },{passive:true});
+        }
+
+        // VIDEO HOVER PREVIEW
         let hoverInterval=null;
         function hoverIn(c){
             const v=c.querySelector('video');
             const bar=c.querySelector('.preview-bar');
             if(!v)return;
             v.play().catch(()=>{});
-            // Check duration for scrubbing
-            v.addEventListener('loadedmetadata',function handler(){
-                if(v.duration>30){
+            const trySetup=()=>{
+                if(v.duration&&v.duration>30){
                     let pos=0;
                     const step=v.duration/10;
                     hoverInterval=setInterval(()=>{
@@ -279,18 +322,9 @@
                         if(bar)bar.style.width=(pos/v.duration*100)+'%';
                     },400);
                 }
-                v.removeEventListener('loadedmetadata',handler);
-            });
-            if(v.duration&&v.duration>30){
-                let pos=0;
-                const step=v.duration/10;
-                hoverInterval=setInterval(()=>{
-                    pos+=step;
-                    if(pos>=v.duration)pos=0;
-                    v.currentTime=pos;
-                    if(bar)bar.style.width=(pos/v.duration*100)+'%';
-                },400);
-            }
+            };
+            if(v.readyState>=1)trySetup();
+            else v.addEventListener('loadedmetadata',trySetup,{once:true});
         }
         function hoverOut(c){
             const v=c.querySelector('video');
@@ -300,11 +334,17 @@
             if(hoverInterval){clearInterval(hoverInterval);hoverInterval=null}
         }
 
-        // Lightbox
+        // LIGHTBOX
         function openLB(s,isV){
-            const lb=document.getElementById('lightbox'),i=document.getElementById('lbImg'),v=document.getElementById('lbVid');
-            if(isV){i.style.display='none';v.style.display='block';v.src=s;v.play()}
-            else{v.style.display='none';v.pause();i.style.display='block';i.src=s}
+            const lb=document.getElementById('lightbox'),i=document.getElementById('lbImg'),v=document.getElementById('lbVid'),mb=document.getElementById('muteBtn');
+            if(isV){
+                i.style.display='none';v.style.display='block';mb.style.display='block';
+                v.src=s;v.muted=true;v.play();
+                mb.textContent='🔇 Son';
+            } else {
+                v.style.display='none';v.pause();mb.style.display='none';
+                i.style.display='block';i.src=s;
+            }
             lb.classList.add('active');document.body.style.overflow='hidden';
         }
         function closeLB(){
@@ -312,9 +352,14 @@
             document.getElementById('lbVid').pause();
             document.body.style.overflow='';
         }
+        function toggleMute(){
+            const v=document.getElementById('lbVid'),mb=document.getElementById('muteBtn');
+            v.muted=!v.muted;
+            mb.textContent=v.muted?'🔇 Son':'🔊 Son';
+        }
         document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
 
-        // Navigation
+        // NAVIGATION
         function showPage(e,id){
             document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -323,7 +368,7 @@
             window.scrollTo({top:document.querySelector('.sticky-nav').offsetTop,behavior:'smooth'});
         }
 
-        // Scroll reveal
+        // SCROLL REVEAL
         function initReveal(){
             const obs=new IntersectionObserver((entries)=>{
                 entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
@@ -331,7 +376,7 @@
             document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
         }
 
-        // Contact
+        // CONTACT
         function sendDiscord(){
             const n=document.getElementById('name').value,e=document.getElementById('email').value,m=document.getElementById('message').value;
             if(!n||!e||!m){showSt('Remplis tous les champs!',0);return}
