@@ -3,176 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPTORU_Test3 - Creative Studio</title>
+    <title>RAPTORU_Test4 - Creative Studio</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{background:#0a0a0a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;line-height:1.6}
-        header{position:relative;height:500px;background:linear-gradient(135deg,#0a0a0a 0%,#1a0a0a 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:3px solid #00d4d4;margin-top:50px}
-        .header-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('images/test bannière discord.png');background-size:cover;background-position:center;opacity:0.4;z-index:0}
-        .header-content{position:relative;z-index:2;text-align:center}
-        .profile-pic{width:160px;height:160px;border-radius:50%;border:4px solid #00d4d4;object-fit:cover;margin:0 auto 25px;box-shadow:0 0 50px rgba(0,212,212,0.5)}
-        .header-title{font-size:3.5rem;margin:15px 0;background:linear-gradient(135deg,#fff,#00d4d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .header-subtitle{font-size:1.2rem;color:#00d4d4;margin:15px 0;font-weight:600;text-shadow:0 0 10px rgba(0,212,212,0.3)}
-        .header-desc{font-size:1rem;color:#fff;margin-top:15px;font-weight:500}
-        .nav{max-width:1200px;margin:30px auto;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding:0 20px}
-        .nav button{background:transparent;color:#00d4d4;border:2px solid #00d4d4;padding:10px 20px;cursor:pointer;border-radius:5px;font-size:1rem;transition:all 0.3s;font-weight:bold}
-        .nav button:hover,.nav button.active{background:#00d4d4;color:#0a0a0a}
-        main{max-width:1400px;margin:0 auto;padding:40px 20px}
-        .section{display:none}
-        .section.active{display:block;animation:fadeIn 0.5s}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        .section-title{font-size:2.2rem;margin:50px 0 30px;color:#00d4d4;border-bottom:3px solid #00d4d4;padding-bottom:15px;text-transform:uppercase;letter-spacing:2px}
-        .subsection-title{font-size:1.3rem;margin:30px 0 20px;color:#00d4d4;padding-left:10px;border-left:3px solid #00d4d4;opacity:0.8}
-        .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin:20px 0}
-        .card{background:#1a1a1a;border:2px solid #333;border-radius:8px;overflow:hidden;cursor:pointer;transition:all 0.3s;position:relative}
-        .card:hover{border-color:#00d4d4;transform:translateY(-8px);box-shadow:0 15px 40px rgba(0,212,212,0.25)}
-        .card-img{width:100%;height:180px;object-fit:cover;display:block;background:#0a0a0a}
-        .card img{width:100%;height:100%;object-fit:cover}
-        .card video{width:100%;height:100%;object-fit:cover}
-        .card-label{padding:12px;font-size:0.8rem;color:#aaa;text-align:center;background:#0f0f0f;border-top:1px solid #333;word-break:break-word}
+        :root{--accent:#00d4d4;--bg:#050505;--card:#111;--border:#1a1a1a;--text:#e0e0e0;--dim:#666}
+        body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif}
+        ::selection{background:var(--accent);color:#000}
 
-        /* Accordion */
-        .accordion{margin:20px 0}
-        .accordion-header{background:#1a1a1a;border:2px solid #333;border-radius:8px;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.3s;margin-bottom:5px}
-        .accordion-header:hover{border-color:#00d4d4;background:#222}
-        .accordion-header.open{border-color:#00d4d4;background:#1a2a2a}
-        .accordion-header h4{color:#00d4d4;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px}
-        .accordion-arrow{color:#00d4d4;font-size:1.5rem;transition:transform 0.3s}
-        .accordion-header.open .accordion-arrow{transform:rotate(180deg)}
-        .accordion-content{display:none;padding:10px 0;animation:fadeIn 0.3s}
-        .accordion-content.open{display:block}
-        .sub-label{font-size:0.95rem;color:#aaa;margin:15px 0 10px 10px;padding-left:10px;border-left:2px solid #333}
+        /* HEADER */
+        header{position:relative;height:100vh;max-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        .header-bg{position:absolute;inset:0;background:url('images/test bannière discord.png') center/cover;opacity:0.25;filter:blur(2px)}
+        .header-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0.3) 0%,rgba(5,5,5,0.8) 70%,var(--bg) 100%)}
+        .header-content{position:relative;z-index:2;text-align:center;padding:0 20px}
+        .profile-pic{width:130px;height:130px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;box-shadow:0 0 40px rgba(0,212,212,0.3);animation:fadeUp 0.8s ease}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .header-content h1{font-size:clamp(2.5rem,8vw,4.5rem);font-weight:900;letter-spacing:-2px;margin:20px 0 10px;background:linear-gradient(135deg,#fff 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp 0.8s ease 0.1s both}
+        .tagline{font-size:1rem;color:var(--accent);letter-spacing:3px;text-transform:uppercase;font-weight:600;animation:fadeUp 0.8s ease 0.2s both}
+        .bio{font-size:0.9rem;color:var(--dim);margin-top:12px;animation:fadeUp 0.8s ease 0.3s both}
+        .header-cta{margin-top:30px;display:flex;gap:15px;justify-content:center;animation:fadeUp 0.8s ease 0.4s both}
+        .header-cta a{padding:10px 25px;border:1.5px solid var(--accent);color:var(--accent);text-decoration:none;border-radius:4px;font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
+        .header-cta a:hover{background:var(--accent);color:#000}
+        .header-cta a.filled{background:var(--accent);color:#000}
+        .header-cta a.filled:hover{background:transparent;color:var(--accent)}
+        .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;animation:bounce 2s infinite}
+        @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
-        /* Lightbox */
-        #lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:9999;align-items:center;justify-content:center;flex-direction:column}
+        /* NAV */
+        .sticky-nav{position:sticky;top:0;z-index:100;background:rgba(5,5,5,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 0}
+        .sticky-nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:8px;padding:0 20px;flex-wrap:wrap}
+        .sticky-nav button{background:transparent;color:var(--dim);border:none;padding:8px 16px;cursor:pointer;font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;border-radius:3px}
+        .sticky-nav button:hover{color:var(--accent)}
+        .sticky-nav button.active{color:var(--accent);background:rgba(0,212,212,0.1)}
+
+        /* MAIN */
+        main{max-width:1200px;margin:0 auto;padding:40px 20px}
+        .page{display:none}
+        .page.active{display:block}
+
+        /* SECTION HEADERS */
+        .cat-header{margin:60px 0 25px;display:flex;align-items:center;gap:15px}
+        .cat-header h2{font-size:1.1rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);font-weight:700}
+        .cat-header .line{flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
+        .sub-header{margin:25px 0 15px;font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:600;padding-left:2px}
+
+        /* GRIDS */
+        .grid-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-bottom:30px}
+        .grid-md{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:30px}
+        .grid-lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;margin-bottom:30px}
+
+        /* CARDS */
+        .card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.25s ease;position:relative}
+        .card:hover{border-color:rgba(0,212,212,0.4);transform:translateY(-4px);box-shadow:0 8px 25px rgba(0,212,212,0.15)}
+        .card-media{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#0a0a0a}
+        .card-sm .card-media{aspect-ratio:1/1}
+        .card-label{padding:8px 10px;font-size:0.65rem;color:var(--dim);text-align:center;letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,212,212,0.05));opacity:0;transition:opacity 0.3s;pointer-events:none}
+        .card:hover::after{opacity:1}
+
+        /* Progress bar on hover */
+        .preview-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0;transition:none;z-index:5}
+
+        /* LIGHTBOX */
+        #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:9999;align-items:center;justify-content:center}
         #lightbox.active{display:flex}
-        #lightbox img,#lightbox video{max-width:90%;max-height:85%;border:3px solid #00d4d4;border-radius:8px;object-fit:contain}
-        .lightbox-close{position:absolute;top:20px;right:30px;font-size:2.5rem;color:#00d4d4;cursor:pointer;background:none;border:none;z-index:10000;transition:all 0.3s}
-        .lightbox-close:hover{transform:rotate(90deg)}
+        #lightbox img,#lightbox video{max-width:92%;max-height:88%;border-radius:6px;object-fit:contain}
+        .lb-close{position:absolute;top:15px;right:20px;font-size:1.8rem;color:var(--dim);cursor:pointer;background:none;border:none;transition:all 0.2s;z-index:10000;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+        .lb-close:hover{color:#fff;background:rgba(255,255,255,0.1)}
 
-        /* Contact */
-        .contact{background:#1a1a1a;padding:40px;border-radius:8px;max-width:600px;margin:60px auto;border:2px solid #00d4d4}
-        .contact h2{color:#00d4d4;margin-bottom:20px;font-size:1.8rem}
-        .contact input,.contact textarea{width:100%;padding:12px;margin:15px 0;background:#0f0f0f;border:1px solid #333;color:#fff;border-radius:5px;font-family:inherit}
-        .contact input:focus,.contact textarea:focus{outline:none;border-color:#00d4d4;box-shadow:0 0 15px rgba(0,212,212,0.3)}
-        .contact textarea{resize:vertical;min-height:120px}
-        .btn-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-        .btn{padding:12px;border:2px solid #00d4d4;background:transparent;color:#00d4d4;cursor:pointer;border-radius:5px;font-weight:bold;transition:all 0.3s;font-size:1rem}
-        .btn:hover{background:#00d4d4;color:#0a0a0a}
-        #status{margin-top:15px;padding:10px;border-radius:5px;text-align:center;display:none}
-        .status-success{background:rgba(0,212,212,0.2);color:#00d4d4;border:1px solid #00d4d4}
-        .status-error{background:rgba(244,67,54,0.2);color:#f44336;border:1px solid #f44336}
+        /* CONTACT */
+        .contact-wrap{max-width:500px;margin:60px auto;padding:35px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+        .contact-wrap h2{font-size:1rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:25px;font-weight:700}
+        .field{margin-bottom:18px}
+        .field label{display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:6px;font-weight:600}
+        .field input,.field textarea{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-family:inherit;font-size:0.9rem;transition:border 0.3s}
+        .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+        .field textarea{resize:vertical;min-height:100px}
+        .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+        .btn{padding:10px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;border-radius:4px;font-weight:700;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
+        .btn:hover{background:var(--accent);color:#000}
+        #status{margin-top:12px;padding:10px;border-radius:4px;text-align:center;display:none;font-size:0.85rem}
+        .status-success{background:rgba(0,212,212,0.1);color:var(--accent);border:1px solid rgba(0,212,212,0.3);display:block}
+        .status-error{background:rgba(244,67,54,0.1);color:#f44336;border:1px solid rgba(244,67,54,0.3);display:block}
 
-        /* Footer */
-        footer{background:#1a1a1a;padding:30px;text-align:center;margin-top:60px;border-top:2px solid #00d4d4;color:#aaa}
-        footer a{color:#00d4d4;text-decoration:none;margin:0 10px}
+        /* FOOTER */
+        footer{margin-top:80px;padding:40px 20px;border-top:1px solid var(--border);text-align:center}
+        footer p{color:var(--dim);font-size:0.8rem;margin:5px 0}
+        footer a{color:var(--accent);text-decoration:none;font-weight:600;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;margin:0 12px;transition:opacity 0.3s}
+        footer a:hover{opacity:0.7}
+
+        /* SCROLL ANIMATIONS */
+        .reveal{opacity:0;transform:translateY(25px);transition:all 0.6s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
 
         @media(max-width:768px){
-            header{height:350px;margin-top:25px}
-            .header-title{font-size:2.2rem}
-            .profile-pic{width:120px;margin-bottom:15px}
-            .nav{gap:10px}
-            .nav button{padding:8px 15px;font-size:0.9rem}
-            .gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
-            .btn-group{grid-template-columns:1fr}
+            header{max-height:500px}
+            .profile-pic{width:100px;height:100px}
+            .grid-sm{grid-template-columns:repeat(auto-fill,minmax(70px,1fr))}
+            .grid-md{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+            .grid-lg{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+            .btn-row{grid-template-columns:1fr}
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-bg"></div>
+        <div class="header-gradient"></div>
         <div class="header-content">
-            <img src="images/Coqueline Discord.png" class="profile-pic" alt="RAPTORU_" onerror="this.style.display='none'">
-            <h1 class="header-title">RAPTORU_</h1>
-            <p class="header-subtitle">Animateur 2D • Motion Designer • Graphiste</p>
-            <p class="header-desc">Créateur de contenu • Disponible pour commandes</p>
+            <img src="images/Coqueline Discord.png" class="profile-pic" alt="RAPTORU_">
+            <h1>RAPTORU_</h1>
+            <p class="tagline">Animateur 2D • Motion Designer • Graphiste</p>
+            <p class="bio">Créateur de contenu • Disponible pour commandes</p>
+            <div class="header-cta">
+                <a href="#portfolio" class="filled" onclick="showPage(event,'portfolio')">Portfolio</a>
+                <a href="#contact" onclick="showPage(event,'contact')">Contact</a>
+            </div>
         </div>
+        <div class="scroll-hint">↓ scroll</div>
     </header>
 
-    <div class="nav">
-        <button class="active" onclick="showSection(event, 'portfolio')">Portfolio</button>
-        <button onclick="showSection(event, 'contact')">Contact</button>
-    </div>
+    <nav class="sticky-nav">
+        <div class="sticky-nav-inner">
+            <button class="active" onclick="showPage(event,'portfolio')">Portfolio</button>
+            <button onclick="showPage(event,'contact')">Contact</button>
+        </div>
+    </nav>
 
     <main>
-        <div id="portfolio" class="section active">
+        <div id="portfolio" class="page active">
+
             <!-- BADGES -->
-            <div class="section-title">🎨 Badges</div>
-            
-            <div class="subsection-title">Badges Évolutif</div>
-            <div class="gallery" id="badgesPabloGallery"></div>
-
-            <div class="subsection-title">Badges Couleur</div>
-            <div class="gallery" id="badgesNhsGallery"></div>
-
-            <div class="subsection-title">Badges Différents</div>
-            <div class="gallery" id="badgesTitansGallery"></div>
+            <div class="cat-header reveal"><h2>Badges</h2><div class="line"></div></div>
+            <div class="sub-header reveal">Évolutif</div>
+            <div class="grid-sm reveal" id="g-badges-evo"></div>
+            <div class="sub-header reveal">Couleur</div>
+            <div class="grid-sm reveal" id="g-badges-col"></div>
+            <div class="sub-header reveal">Différents</div>
+            <div class="grid-sm reveal" id="g-badges-diff"></div>
 
             <!-- EMOTES -->
-            <div class="section-title">😊 Emotes</div>
-            
-            <div class="subsection-title">Fixe</div>
-            <div class="gallery" id="emotesFixeGallery"></div>
-
-            <div class="subsection-title">Animée</div>
-            <div class="gallery" id="emotesAnimeeGallery"></div>
+            <div class="cat-header reveal"><h2>Emotes</h2><div class="line"></div></div>
+            <div class="sub-header reveal">Fixe</div>
+            <div class="grid-sm reveal" id="g-emotes-fix"></div>
+            <div class="sub-header reveal">Animée</div>
+            <div class="grid-sm reveal" id="g-emotes-anim"></div>
 
             <!-- ASSET TWITCH -->
-            <div class="section-title">🎮 Asset Twitch</div>
-            <div class="accordion" id="assetTwitchAccordion">
-                <!-- Overlay d'écran -->
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h4>Overlay d'écran</h4>
-                    <span class="accordion-arrow">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="sub-label">Overlay</div>
-                    <div class="gallery" id="overlayGallery"></div>
-                    <div class="sub-label">Écran d'attente</div>
-                    <div class="gallery" id="ecranAttenteGallery"></div>
-                </div>
-
-                <!-- Alertes -->
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h4>Alertes</h4>
-                    <span class="accordion-arrow">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="sub-label">Raid</div>
-                    <div class="gallery" id="alerteRaidGallery"></div>
-                    <div class="sub-label">Follow</div>
-                    <div class="gallery" id="alerteFollowGallery"></div>
-                    <div class="sub-label">Sub</div>
-                    <div class="gallery" id="alerteSubGallery"></div>
-                </div>
-            </div>
+            <div class="cat-header reveal"><h2>Asset Twitch</h2><div class="line"></div></div>
+            <div class="sub-header reveal">Overlay</div>
+            <div class="grid-md reveal" id="g-overlay"></div>
+            <div class="sub-header reveal">Écran d'attente</div>
+            <div class="grid-md reveal" id="g-ecran"></div>
+            <div class="sub-header reveal">Alerte Raid</div>
+            <div class="grid-md reveal" id="g-raid"></div>
+            <div class="sub-header reveal">Alerte Follow</div>
+            <div class="grid-md reveal" id="g-follow"></div>
+            <div class="sub-header reveal">Alerte Sub</div>
+            <div class="grid-md reveal" id="g-sub"></div>
 
             <!-- ALERTES ANIMEES -->
-            <div class="section-title">✨ Alertes Animées</div>
-            <div class="gallery" id="alertesAnimeeGallery"></div>
+            <div class="cat-header reveal"><h2>Alertes Animées</h2><div class="line"></div></div>
+            <div class="grid-md reveal" id="g-alertes-anim"></div>
 
             <!-- TRANSITIONS -->
-            <div class="section-title">🔄 Transitions</div>
-            
-            <div class="subsection-title">Motion Design</div>
-            <div class="gallery" id="transitionsMotionGallery"></div>
-
-            <div class="subsection-title">Transition Animée</div>
-            <div class="gallery" id="transitionsAnimeeGallery"></div>
+            <div class="cat-header reveal"><h2>Transitions</h2><div class="line"></div></div>
+            <div class="sub-header reveal">Motion Design</div>
+            <div class="grid-md reveal" id="g-trans-motion"></div>
+            <div class="sub-header reveal">Transition Animée</div>
+            <div class="grid-md reveal" id="g-trans-anim"></div>
 
             <!-- GALERIE -->
-            <div class="section-title">🖼️ Galerie</div>
-            <div class="gallery" id="galleryGallery"></div>
+            <div class="cat-header reveal"><h2>Galerie</h2><div class="line"></div></div>
+            <div class="grid-lg reveal" id="g-gallery"></div>
         </div>
 
-        <div id="contact" class="section">
-            <div class="contact">
+        <div id="contact" class="page">
+            <div class="cat-header"><h2>Contact</h2><div class="line"></div></div>
+            <div class="contact-wrap">
                 <h2>Envoyez-moi un message</h2>
                 <form id="contactForm">
-                    <input type="text" id="name" placeholder="Ton nom" required>
-                    <input type="email" id="email" placeholder="Ton email" required>
-                    <textarea id="message" placeholder="Ton message" required></textarea>
-                    <div class="btn-group">
+                    <div class="field"><label>Nom</label><input type="text" id="name" required></div>
+                    <div class="field"><label>Email</label><input type="email" id="email" required></div>
+                    <div class="field"><label>Message</label><textarea id="message" required></textarea></div>
+                    <div class="btn-row">
                         <button type="button" class="btn" onclick="sendDiscord()">Discord</button>
                         <button type="submit" class="btn">Email</button>
                     </div>
@@ -182,159 +195,162 @@
         </div>
     </main>
 
-    <div id="lightbox" onclick="if(event.target.id === 'lightbox') closeLightbox();">
-        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <img id="lightboxImg" style="display:none;">
-        <video id="lightboxVideo" style="display:none;" controls loop></video>
+    <div id="lightbox" onclick="if(event.target.id==='lightbox')closeLB()">
+        <button class="lb-close" onclick="closeLB()">&times;</button>
+        <img id="lbImg" style="display:none">
+        <video id="lbVid" style="display:none" controls loop></video>
     </div>
 
     <footer>
-        <p><strong>RAPTORU_</strong> - Créateur de contenu</p>
-        <p style="margin-top:15px;">
+        <p><strong style="color:var(--accent)">RAPTORU_</strong></p>
+        <p style="margin:12px 0">
             <a href="https://www.twitch.tv/raptoru_" target="_blank">Twitch</a>
             <a href="https://www.tiktok.com/@raptor_aigri" target="_blank">TikTok</a>
         </p>
-        <p style="margin-top:20px;font-size:0.85rem;">© 2024 Raptoru_</p>
+        <p style="font-size:0.7rem;margin-top:15px">© 2024 Raptoru_ • Tous droits réservés</p>
     </footer>
 
     <script>
-        const WEBHOOK = 'https://discord.com/api/webhooks/1503918156022808597/Bks1v2ZFlVTMPD2liRIBouvWNZmjgreyp9EjCwWKtnppcXp0h0zwFTUYQQoQsGvo-Bpw';
+        const WH='https://discord.com/api/webhooks/1503918156022808597/Bks1v2ZFlVTMPD2liRIBouvWNZmjgreyp9EjCwWKtnppcXp0h0zwFTUYQQoQsGvo-Bpw';
 
-        const files = {
-            badgesPablo: ['1Racine et détruit.png', '2Abimé et sale.png', '3.png', '4.png', '5Flashy.png'],
-            badgesNhs: ['Bleu.png', 'Jaune.png', 'Rose.png', 'rouge.png', 'Multicolor.png'],
-            badgesTitans: ['1. UglyTitan.png', '2. CartTtian.png', '5. ArmoredTitan.png', '6. ColossalTitan.png', '7. BeastTitan.png'],
-            emotesFixe: ['Waaah.png', 'Flex megumin.png', 'Roooh.png', 'Grrr séance UV.png', 'Raptor sadge Fixed.png'],
-            emotesAnimee: ['AhooV2.gif', 'Kirby_Fixed.gif', 'Boude.gif', 'HelloKnight_.gif', 'Bobombe Finale.gif'],
-            overlay: ['Asset sub.mp4', 'Just Chatting.mp4', 'Intermission.mp4', 'Cam2.mp4'],
-            ecranAttente: ['Starting Screen.mp4', 'Ending Screen fixed.mp4'],
-            alerteRaid: ['Alerte raid exemple.mp4'],
-            alerteFollow: ['Dofus Alerte.mp4', 'Template Alerte follow.mp4'],
-            alerteSub: ['Jerry Smith.mp4'],
-            alertesAnimees: ['Rick&Morty_1.mp4', 'Eeau Anim.mp4', 'RB Classic.mp4', 'Nuage Classique.mp4', 'Nuage Rouge.mp4', 'CSC.mp4'],
-            transitionsMotion: ['Appareil photo exemple 2.mp4', 'Cercle exemple.mp4', 'Page exemple.mp4', 'Pixel Exemple.mp4', 'Rectangle.mp4'],
-            transitionsAnimees: ['transi portail.mp4', 'Transi snk.mp4', 'Transition Feu.mp4', 'Video Terre.mp4', 'Video Wind.mp4', 'Vidéo Eau.mp4'],
-            gallery: ['test bannière discord.png', 'C21TTS.gif', 'Mikasatts.gif', 'Daki.png', 'Ayanokoji PPClair.png', 'Coqueline Discord.png', 'Qilby Avatar 3 .png']
+        const F={
+            badgesEvo:['1Racine et détruit.png','2Abimé et sale.png','3.png','4.png','5Flashy.png'],
+            badgesCol:['Bleu.png','Jaune.png','Rose.png','rouge.png','Multicolor.png'],
+            badgesDiff:['1. UglyTitan.png','2. CartTtian.png','5. ArmoredTitan.png','6. ColossalTitan.png','7. BeastTitan.png'],
+            emoteFix:['Waaah.png','Flex megumin.png','Roooh.png','Grrr séance UV.png','Raptor sadge Fixed.png'],
+            emoteAnim:['AhooV2.gif','Kirby_Fixed.gif','Boude.gif','HelloKnight_.gif','Bobombe Finale.gif'],
+            overlay:['Asset sub.mp4','Just Chatting.mp4','Intermission.mp4','Cam2.mp4'],
+            ecran:['Starting Screen.mp4','Ending Screen fixed.mp4'],
+            raid:['Alerte raid exemple.mp4'],
+            follow:['Dofus Alerte.mp4','Template Alerte follow.mp4'],
+            sub:['Jerry Smith.mp4'],
+            alertesAnim:['Rick&Morty_1.mp4','Eeau Anim.mp4','RB Classic.mp4','Nuage Classique.mp4','Nuage Rouge.mp4','CSC.mp4'],
+            transMotion:['Appareil photo exemple 2.mp4','Cercle exemple.mp4','Page exemple.mp4','Pixel Exemple.mp4','Rectangle.mp4'],
+            transAnim:['transi portail.mp4','Transi snk.mp4','Transition Feu.mp4','Video Terre.mp4','Video Wind.mp4','Vidéo Eau.mp4'],
+            gallery:['test bannière discord.png','C21TTS.gif','Mikasatts.gif','Daki.png','Ayanokoji PPClair.png','Coqueline Discord.png','Qilby Avatar 3 .png']
         };
 
-        function getFolder(filename) {
-            if (filename.endsWith('.mp4')) return 'videos';
-            if (filename.endsWith('.gif')) return 'videos';
-            return 'images';
+        function dir(f){return f.endsWith('.mp4')||f.endsWith('.gif')?'videos':'images'}
+
+        function card(f,size){
+            const s=dir(f)+'/'+f,g=f.endsWith('.gif'),v=f.endsWith('.mp4'),l=f.replace(/\.\w+$/,'');
+            const cls=size==='sm'?'card card-sm':'card';
+            if(g)return`<div class="${cls}" onclick="openLB('${s}',0)"><img class="card-media" src="${s}" alt="${l}" onerror="this.parentElement.style.display='none'"><div class="card-label">${l}</div></div>`;
+            if(v)return`<div class="${cls}" onmouseenter="hoverIn(this)" onmouseleave="hoverOut(this)" onclick="openLB('${s}',1)"><video class="card-media" muted loop playsinline preload="metadata"><source src="${s}"></video><div class="preview-bar"></div><div class="card-label">${l}</div></div>`;
+            return`<div class="${cls}" onclick="openLB('${s}',0)"><img class="card-media" src="${s}" alt="${l}" onerror="this.parentElement.style.display='none'"><div class="card-label">${l}</div></div>`;
         }
 
-        function createCard(filename) {
-            const folder = getFolder(filename);
-            const src = folder + '/' + filename;
-            const isGif = filename.endsWith('.gif');
-            const isVideo = filename.endsWith('.mp4');
-            const label = filename.replace(/\.(mp4|gif|png|jpg)$/i, '');
-            
-            if (isGif) {
-                return `<div class="card" onclick="openLightbox('${src}', false)"><img src="${src}" class="card-img" alt="${label}" style="height:180px;object-fit:cover;" onerror="this.parentElement.style.opacity='0.5'"><div class="card-label">${label}</div></div>`;
-            } else if (isVideo) {
-                return `<div class="card" onmouseenter="previewVideo(this)" onmouseleave="stopPreview(this)" onclick="openLightbox('${src}', true)"><video style="width:100%;height:180px;object-fit:cover;" muted loop playsinline preload="metadata" data-src="${src}"><source src="${src}"></video><div class="card-label">${label}</div></div>`;
-            } else {
-                return `<div class="card" onclick="openLightbox('${src}', false)"><img src="${src}" class="card-img" alt="${label}" style="height:180px;object-fit:cover;" onerror="this.parentElement.style.opacity='0.5'"><div class="card-label">${label}</div></div>`;
+        function fill(id,arr,size){document.getElementById(id).innerHTML=arr.map(f=>card(f,size)).join('')}
+
+        function init(){
+            fill('g-badges-evo',F.badgesEvo,'sm');
+            fill('g-badges-col',F.badgesCol,'sm');
+            fill('g-badges-diff',F.badgesDiff,'sm');
+            fill('g-emotes-fix',F.emoteFix,'sm');
+            fill('g-emotes-anim',F.emoteAnim,'sm');
+            fill('g-overlay',F.overlay,'md');
+            fill('g-ecran',F.ecran,'md');
+            fill('g-raid',F.raid,'md');
+            fill('g-follow',F.follow,'md');
+            fill('g-sub',F.sub,'md');
+            fill('g-alertes-anim',F.alertesAnim,'md');
+            fill('g-trans-motion',F.transMotion,'md');
+            fill('g-trans-anim',F.transAnim,'md');
+            fill('g-gallery',F.gallery,'lg');
+            initReveal();
+        }
+
+        // Preview on hover - YouTube style scrubbing for videos >30s
+        let hoverInterval=null;
+        function hoverIn(c){
+            const v=c.querySelector('video');
+            const bar=c.querySelector('.preview-bar');
+            if(!v)return;
+            v.play().catch(()=>{});
+            // Check duration for scrubbing
+            v.addEventListener('loadedmetadata',function handler(){
+                if(v.duration>30){
+                    let pos=0;
+                    const step=v.duration/10;
+                    hoverInterval=setInterval(()=>{
+                        pos+=step;
+                        if(pos>=v.duration)pos=0;
+                        v.currentTime=pos;
+                        if(bar)bar.style.width=(pos/v.duration*100)+'%';
+                    },400);
+                }
+                v.removeEventListener('loadedmetadata',handler);
+            });
+            if(v.duration&&v.duration>30){
+                let pos=0;
+                const step=v.duration/10;
+                hoverInterval=setInterval(()=>{
+                    pos+=step;
+                    if(pos>=v.duration)pos=0;
+                    v.currentTime=pos;
+                    if(bar)bar.style.width=(pos/v.duration*100)+'%';
+                },400);
             }
         }
-
-        function previewVideo(card) {
-            const vid = card.querySelector('video');
-            if (vid) { vid.currentTime = 0; vid.play().catch(() => {}); }
+        function hoverOut(c){
+            const v=c.querySelector('video');
+            const bar=c.querySelector('.preview-bar');
+            if(v){v.pause();v.currentTime=0}
+            if(bar)bar.style.width='0';
+            if(hoverInterval){clearInterval(hoverInterval);hoverInterval=null}
         }
 
-        function stopPreview(card) {
-            const vid = card.querySelector('video');
-            if (vid) { vid.pause(); vid.currentTime = 0; }
+        // Lightbox
+        function openLB(s,isV){
+            const lb=document.getElementById('lightbox'),i=document.getElementById('lbImg'),v=document.getElementById('lbVid');
+            if(isV){i.style.display='none';v.style.display='block';v.src=s;v.play()}
+            else{v.style.display='none';v.pause();i.style.display='block';i.src=s}
+            lb.classList.add('active');document.body.style.overflow='hidden';
         }
-
-        function loadGallery() {
-            document.getElementById('badgesPabloGallery').innerHTML = files.badgesPablo.map(createCard).join('');
-            document.getElementById('badgesNhsGallery').innerHTML = files.badgesNhs.map(createCard).join('');
-            document.getElementById('badgesTitansGallery').innerHTML = files.badgesTitans.map(createCard).join('');
-            document.getElementById('emotesFixeGallery').innerHTML = files.emotesFixe.map(createCard).join('');
-            document.getElementById('emotesAnimeeGallery').innerHTML = files.emotesAnimee.map(createCard).join('');
-            document.getElementById('overlayGallery').innerHTML = files.overlay.map(createCard).join('');
-            document.getElementById('ecranAttenteGallery').innerHTML = files.ecranAttente.map(createCard).join('');
-            document.getElementById('alerteRaidGallery').innerHTML = files.alerteRaid.map(createCard).join('');
-            document.getElementById('alerteFollowGallery').innerHTML = files.alerteFollow.map(createCard).join('');
-            document.getElementById('alerteSubGallery').innerHTML = files.alerteSub.map(createCard).join('');
-            document.getElementById('alertesAnimeeGallery').innerHTML = files.alertesAnimees.map(createCard).join('');
-            document.getElementById('transitionsMotionGallery').innerHTML = files.transitionsMotion.map(createCard).join('');
-            document.getElementById('transitionsAnimeeGallery').innerHTML = files.transitionsAnimees.map(createCard).join('');
-            document.getElementById('galleryGallery').innerHTML = files.gallery.map(createCard).join('');
-        }
-
-        function toggleAccordion(header) {
-            header.classList.toggle('open');
-            const content = header.nextElementSibling;
-            content.classList.toggle('open');
-        }
-
-        function openLightbox(src, isMedia) {
-            const lb = document.getElementById('lightbox');
-            const img = document.getElementById('lightboxImg');
-            const vid = document.getElementById('lightboxVideo');
-            
-            if (isMedia) {
-                img.style.display = 'none';
-                vid.style.display = 'block';
-                vid.src = src;
-                vid.play();
-            } else {
-                vid.style.display = 'none';
-                img.style.display = 'block';
-                img.src = src;
-            }
-            lb.classList.add('active');
-        }
-
-        function closeLightbox() {
+        function closeLB(){
             document.getElementById('lightbox').classList.remove('active');
-            document.getElementById('lightboxVideo').pause();
+            document.getElementById('lbVid').pause();
+            document.body.style.overflow='';
         }
+        document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
 
-        function showSection(e, id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        // Navigation
+        function showPage(e,id){
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
+            document.querySelectorAll('.sticky-nav button').forEach(b=>b.classList.remove('active'));
+            if(e&&e.target&&e.target.tagName==='BUTTON')e.target.classList.add('active');
+            window.scrollTo({top:document.querySelector('.sticky-nav').offsetTop,behavior:'smooth'});
         }
 
-        function sendDiscord() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            if (!name || !email || !message) { showStatus('Remplis tous les champs!', false); return; }
-            fetch(WEBHOOK, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ embeds: [{ title: '📩 Nouveau Contact', color: 55508, fields: [{ name: 'Nom', value: name, inline: true }, { name: 'Email', value: email, inline: true }, { name: 'Message', value: message }] }] })
-            }).then(() => { showStatus('Message envoyé sur Discord!', true); document.getElementById('contactForm').reset(); }).catch(() => showStatus('Erreur Discord', false));
+        // Scroll reveal
+        function initReveal(){
+            const obs=new IntersectionObserver((entries)=>{
+                entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+            },{threshold:0.1});
+            document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
         }
 
-        document.getElementById('contactForm').onsubmit = (e) => {
+        // Contact
+        function sendDiscord(){
+            const n=document.getElementById('name').value,e=document.getElementById('email').value,m=document.getElementById('message').value;
+            if(!n||!e||!m){showSt('Remplis tous les champs!',0);return}
+            fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'📩 Contact',color:55508,fields:[{name:'Nom',value:n,inline:1},{name:'Email',value:e,inline:1},{name:'Message',value:m}]}]})
+            }).then(()=>{showSt('Envoyé sur Discord!',1);document.getElementById('contactForm').reset()}).catch(()=>showSt('Erreur',0));
+        }
+        document.getElementById('contactForm').onsubmit=e=>{
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            fetch('https://formspree.io/f/mnqzjonb', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, message })
-            }).then(() => { showStatus('Email envoyé!', true); document.getElementById('contactForm').reset(); }).catch(() => showStatus('Erreur Email', false));
+            const n=document.getElementById('name').value,em=document.getElementById('email').value,m=document.getElementById('message').value;
+            fetch('https://formspree.io/f/mnqzjonb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:em,message:m})
+            }).then(()=>{showSt('Email envoyé!',1);document.getElementById('contactForm').reset()}).catch(()=>showSt('Erreur',0));
         };
-
-        function showStatus(msg, success) {
-            const status = document.getElementById('status');
-            status.textContent = msg;
-            status.className = success ? 'status-success' : 'status-error';
-            status.style.display = 'block';
-            setTimeout(() => status.style.display = 'none', 3000);
+        function showSt(msg,ok){
+            const s=document.getElementById('status');s.textContent=msg;
+            s.className=ok?'status-success':'status-error';
+            setTimeout(()=>s.className='',3000);
         }
 
-        loadGallery();
+        init();
     </script>
 </body>
 </html>
