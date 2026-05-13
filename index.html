@@ -3,1296 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raptoru_ | Creative Studio</title>
+    <title>RAPTORU_ - Creative Studio</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --accent: #00d4d4;
-            --accent-dark: #00a8a8;
-            --bg: #0a0a0a;
-            --bg-light: #121212;
-            --glass: rgba(15, 15, 15, 0.8);
-            --border: rgba(0, 212, 212, 0.15);
-            --text: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.65);
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated Grid Background */
-        #tile-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(0, 212, 212, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 212, 212, 0.03) 0%, transparent 50%);
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        /* ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ */
-        header {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0a0a0a 0%, #0d1f1f 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Animated Background Elements */
-        header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 212, 212, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-            bottom: -100px;
-            left: -5%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 212, 212, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 25s ease-in-out infinite reverse;
-            z-index: 1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) translateX(0px); }
-            50% { transform: translateY(50px) translateX(20px); }
-        }
-
-        .header-banner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 212, 212, 0.05) 0%, transparent 50%, rgba(0, 212, 212, 0.02) 100%);
-            z-index: 1;
-        }
-
-        .header-banner::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            z-index: 3;
-        }
-
-        .profile-section {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 1400px;
-            padding: 60px 40px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        @media (max-width: 1024px) {
-            .profile-section {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-        }
-
-        /* Profile Picture - Left Side */
-        .profile-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
-
-        .pic-wrapper {
-            position: relative;
-            width: 320px;
-            height: 320px;
-            animation: slideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-60px) rotateY(20deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) rotateY(0);
-            }
-        }
-
-        /* Glowing ring around profile pic */
-        .pic-wrapper::before {
-            content: "";
-            position: absolute;
-            inset: -12px;
-            background: conic-gradient(from 0deg, var(--accent), #0d1f1f, var(--accent));
-            border-radius: 50%;
-            animation: spin 8s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .pic-wrapper::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border: 3px solid var(--accent);
-            border-radius: 50%;
-            box-shadow: 
-                inset 0 0 30px rgba(0, 212, 212, 0.2),
-                0 0 50px rgba(0, 212, 212, 0.4),
-                0 0 100px rgba(0, 212, 212, 0.2);
-            z-index: 2;
-        }
-
-        .profile-pic {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            z-index: 1;
-            display: block;
-        }
-
-        /* Profile Info - Right Side */
-        .profile-info {
-            animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(60px) rotateY(-20deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) rotateY(0);
-            }
-        }
-
-        .profile-info h1 {
-            font-size: clamp(2.5rem, 12vw, 6rem);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            position: relative;
-        }
-
-        .profile-info h1::after {
-            content: "";
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-            box-shadow: 0 0 20px var(--accent);
-            animation: slideOut 0.8s ease-out 0.3s backwards;
-        }
-
-        @keyframes slideOut {
-            from {
-                width: 0;
-                opacity: 0;
-            }
-            to {
-                width: 100px;
-                opacity: 1;
-            }
-        }
-
-        .profile-tagline {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            margin: 50px 0 30px 0;
-            line-height: 1.8;
-            font-weight: 300;
-        }
-
-        .profile-skills {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 40px 0;
-        }
-
-        .skill-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 15px 20px;
-            background: rgba(0, 212, 212, 0.08);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-item:hover {
-            border-color: var(--accent);
-            background: rgba(0, 212, 212, 0.15);
-            transform: translateX(10px);
-            box-shadow: 0 8px 25px rgba(0, 212, 212, 0.1);
-        }
-
-        .skill-item::before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            flex-shrink: 0;
-            box-shadow: 0 0 15px var(--accent);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 2px solid var(--accent);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            background: transparent;
-            color: var(--accent);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: var(--accent);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .btn:hover::before {
-            transform: scaleX(1);
-        }
-
-        .btn:hover {
-            color: var(--bg);
-            box-shadow: 0 0 30px rgba(0, 212, 212, 0.5);
-        }
-
-        .btn.primary {
-            background: var(--accent);
-            color: var(--bg);
-            border-color: var(--accent);
-        }
-
-        .btn.primary::before {
-            background: var(--accent-dark);
-        }
-
-        .btn.primary:hover {
-            color: var(--accent);
-        }
-
-        /* ═══════════════════════════════════════ MAIN CONTENT ═══════════════════════════════════════ */
-        main {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 40px;
-            position: relative;
-            z-index: 5;
-        }
-
-        .section {
-            margin-bottom: 100px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInDown 0.6s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-weight: 900;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header h2::before {
-            content: "";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-header h2::after {
-            content: "";
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 2px;
-            box-shadow: 0 0 15px var(--accent);
-        }
-
-        .interact-hint {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-dim);
-            font-weight: 600;
-            display: block;
-            margin-top: 20px;
-        }
-
-        .subsection-header {
-            text-align: center;
-            margin: 50px 0 30px 0;
-            opacity: 0.9;
-        }
-
-        .subsection-header h3 {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent);
-            font-weight: 700;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-        }
-
-        /* Grid System */
-        .grid {
-            display: grid;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .grid-small {
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        }
-
-        .grid-large {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-
-        @media (max-width: 768px) {
-            .grid-large { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-            .grid-small { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
-            .profile-section { padding: 40px 20px; gap: 30px; }
-            .profile-info h1 { font-size: 2.5rem; }
-            main { padding: 50px 20px; }
-        }
-
-        /* Card Component */
-        .card {
-            position: relative;
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            cursor: pointer;
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            group: "card";
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 
-                0 20px 50px rgba(0, 212, 212, 0.2),
-                inset 0 0 1px rgba(0, 212, 212, 0.1);
-            background: rgba(15, 15, 15, 0.95);
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card::after {
-            content: "VOIR +";
-            position: absolute;
-            bottom: 35px;
-            right: 18px;
-            font-size: 0.65rem;
-            font-weight: 900;
-            color: var(--accent);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(15px);
-            letter-spacing: 2px;
-            pointer-events: none;
-        }
-
-        .card:hover::after {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .img-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background-color: #000;
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            flex-grow: 1;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover .img-placeholder {
-            box-shadow: inset 0 0 30px rgba(0, 212, 212, 0.1);
-        }
-
-        .card-label {
-            margin-top: 12px;
-            font-size: 0.7rem;
-            text-align: center;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-        }
-
-        /* Lightbox */
-        #lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 10, 0.98);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        #lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        #lightbox img, #lightbox video {
-            max-width: 90%;
-            max-height: 90%;
-            border: 2px solid var(--accent);
-            border-radius: 12px;
-            box-shadow: 
-                0 0 80px rgba(0, 212, 212, 0.4),
-                0 0 120px rgba(0, 212, 212, 0.2);
-            animation: popIn 0.3s ease-out;
-        }
-
-        @keyframes popIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: var(--text);
-            font-size: 3rem;
-            cursor: pointer;
-            z-index: 10000;
-            opacity: 0.7;
-            transition: all 0.2s;
-            background: none;
-            border: none;
-            font-weight: 300;
-            line-height: 1;
-        }
-
-        .lightbox-close:hover {
-            opacity: 1;
-            transform: rotate(90deg);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            margin-top: 120px;
-            padding: 60px 50px;
-            background: linear-gradient(135deg, rgba(0, 212, 212, 0.08) 0%, rgba(0, 212, 212, 0.02) 100%);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeIn 0.8s ease-out 0.4s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .contact-section h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent);
-            margin-bottom: 40px;
-            font-weight: 900;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            color: var(--text-dim);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(0, 212, 212, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: rgba(0, 212, 212, 0.1);
-            box-shadow: 0 0 20px rgba(0, 212, 212, 0.2);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 130px;
-        }
-
-        .contact-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        @media (max-width: 480px) {
-            .contact-buttons { grid-template-columns: 1fr; }
-            .contact-section { padding: 40px 25px; }
-        }
-
-        .contact-btn {
-            padding: 14px 24px;
-            border: 2px solid var(--accent);
-            background: transparent;
-            color: var(--accent);
-            text-transform: uppercase;
-            font-weight: 800;
-            letter-spacing: 2px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s;
-            font-size: 0.8rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-btn::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-            z-index: -1;
-        }
-
-        .contact-btn:hover::before {
-            transform: scaleX(1);
-        }
-
-        .contact-btn:hover {
-            color: var(--bg);
-            box-shadow: 0 10px 30px rgba(0, 212, 212, 0.3);
-        }
-
-        .contact-btn.discord {
-            background: var(--accent);
-            color: var(--bg);
-        }
-
-        .contact-btn.discord::before {
-            background: var(--accent-dark);
-        }
-
-        .contact-btn.discord:hover {
-            color: var(--accent);
-        }
-
-        .status-message {
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-            display: none;
-            font-size: 0.9rem;
-            animation: slideUp 0.3s ease-out;
-            border: 1px solid;
-        }
-
-        .status-message.success {
-            background: rgba(34, 197, 94, 0.1);
-            border-color: rgba(34, 197, 94, 0.5);
-            color: #22c55e;
-            display: block;
-        }
-
-        .status-message.error {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: rgba(239, 68, 68, 0.5);
-            color: #ef4444;
-            display: block;
-        }
-
-        .contact-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: currentColor;
-            margin-left: 8px;
-            animation: blink 1.4s infinite;
-        }
-
-        @keyframes blink {
-            0%, 60%, 100% { opacity: 1; }
-            30% { opacity: 0.3; }
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 60px 40px;
-            border-top: 1px solid var(--border);
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            margin-top: 100px;
-        }
-
-        footer p {
-            margin: 8px 0;
-        }
-
-        footer strong {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .social-links {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            color: var(--accent);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .social-links a::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .social-links a:hover::after {
-            width: 100%;
-        }
-
-        .social-links a:hover {
-            text-shadow: 0 0 15px var(--accent);
-        }
-
-        @media (max-width: 480px) {
-            footer { padding: 40px 20px; }
-            .social-links { gap: 20px; }
-        }
-    </style>
+        *{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f0f;color:#fff;font-family:'Segoe UI',Arial,sans-serif;line-height:1.6}header{background:linear-gradient(135deg,#1a1a1a 0%,#2a1a1a 100%);padding:60px 20px;text-align:center;border-bottom:3px solid #ff6b00}header h1{font-size:3.5rem;margin:20px 0;background:linear-gradient(135deg,#fff,#ff6b00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}header p{font-size:1.1rem;color:#aaa;margin:10px 0}.nav{max-width:1200px;margin:30px auto 0;display:flex;justify-content:center;gap:30px;flex-wrap:wrap}.nav button{background:transparent;color:#fff;border:2px solid #ff6b00;padding:10px 20px;cursor:pointer;border-radius:5px;font-size:1rem;transition:all 0.3s;font-weight:bold}. nav button:hover,.nav button.active{background:#ff6b00;color:#000}main{max-width:1400px;margin:0 auto;padding:40px 20px}.section{display:none}.section.active{display:block;animation:fadeIn 0.5s}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.section-title{font-size:2rem;margin:40px 0 30px;color:#ff6b00;border-bottom:2px solid #ff6b00;padding-bottom:10px}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;margin:30px 0}.card{background:#1a1a1a;border:1px solid #333;border-radius:8px;overflow:hidden;cursor:pointer;transition:all 0.3s;position:relative}.card:hover{border-color:#ff6b00;transform:translateY(-5px);box-shadow:0 10px 30px rgba(255,107,0,0.2)}.card-img{width:100%;height:180px;object-fit:cover;display:block}.card-label{padding:12px;font-size:0.85rem;color:#aaa;text-align:center;background:#0f0f0f;border-top:1px solid #333}#lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;flex-direction:column}#lightbox.active{display:flex}#lightbox img,#lightbox video{max-width:90%;max-height:85%;border:2px solid #ff6b00;border-radius:8px;object-fit:contain}.lightbox-close{position:absolute;top:20px;right:30px;font-size:2.5rem;color:#fff;cursor:pointer;background:none;border:none;z-index:10000}.contact{background:#1a1a1a;padding:40px;border-radius:8px;max-width:600px;margin:60px auto;border:2px solid #ff6b00}.contact h2{color:#ff6b00;margin-bottom:20px}.contact input,.contact textarea{width:100%;padding:12px;margin:15px 0;background:#0f0f0f;border:1px solid #333;color:#fff;border-radius:5px;font-family:inherit}. contact input:focus,.contact textarea:focus{outline:none;border-color:#ff6b00;box-shadow:0 0 10px rgba(255,107,0,0.3)}.contact textarea{resize:vertical;min-height:120px}.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.btn{padding:12px;border:2px solid #ff6b00;background:transparent;color:#ff6b00;cursor:pointer;border-radius:5px;font-weight:bold;transition:all 0.3s;font-size:1rem}.btn:hover{background:#ff6b00;color:#000}.btn:disabled{opacity:0.5;cursor:not-allowed}#status{margin-top:15px;padding:10px;border-radius:5px;text-align:center;display:none}.status-success{background:rgba(76,175,80,0.2);color:#4caf50;border:1px solid #4caf50}.status-error{background:rgba(244,67,54,0.2);color:#f44336;border:1px solid #f44336}footer{background:#1a1a1a;padding:30px;text-align:center;margin-top:60px;border-top:2px solid #ff6b00;color:#aaa}@media(max-width:768px){header h1{font-size:2rem}.nav{gap:15px}.nav button{padding:8px 15px;font-size:0.9rem}.gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.btn-group{grid-template-columns:1fr}}</style>
 </head>
 <body>
-    <div id="tile-bg"></div>
-    
-    <!-- HEADER -->
     <header>
-        <div class="header-banner"></div>
-        <div class="profile-section">
-            <!-- Left: Profile Picture -->
-            <div class="profile-visual">
-                <div class="pic-wrapper">
-                    <img src="images/Coqueline Discord.png" class="profile-pic" alt="Raptoru_">
-                </div>
-            </div>
-
-            <!-- Right: Profile Info -->
-            <div class="profile-info">
-                <h1>Raptoru_</h1>
-                <p class="profile-tagline">
-                    Animateur 2D • Motion Designer • Graphiste
-                    <br>
-                    <span style="font-size: 0.9rem; color: var(--accent); margin-top: 10px; display: inline-block;">Disponible pour commandes</span>
-                </p>
-                <div class="profile-skills">
-                    <div class="skill-item">Animation 2D</div>
-                    <div class="skill-item">Motion Design</div>
-                    <div class="skill-item">Graphisme Créatif</div>
-                </div>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn primary">Commande</a>
-                    <a href="#galerie" class="btn">Voir Travaux</a>
-                </div>
-            </div>
+        <h1>RAPTORU_</h1>
+        <p>Animateur 2D • Motion Designer • Graphiste</p>
+        <p style="font-size:0.9rem;color:#ff6b00;margin-top:15px;">Créatrice de contenu • Disponible pour commandes</p>
+        <div class="nav">
+            <button class="active" onclick="showSection('portfolio')">Portfolio</button>
+            <button onclick="showSection('contact')">Contact</button>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main>
-        <!-- Badges -->
-        <div class="section">
-            <div class="section-header">
-                <h2>Badge Évolutif</h2>
-                <span class="interact-hint">— Cliquez pour agrandir —</span>
-            </div>
-            <div class="grid grid-small" id="badgeEvolutif"></div>
+        <!-- PORTFOLIO SECTION -->
+        <div id="portfolio" class="section active">
+            <!-- BADGES -->
+            <div class="section-title">🎨 Badges</div>
+            <div class="gallery" id="badgesGallery"></div>
+
+            <!-- EMOTES -->
+            <div class="section-title">😊 Emotes</div>
+            <div class="gallery" id="emotesGallery"></div>
+
+            <!-- MOTION DESIGN -->
+            <div class="section-title">✨ Motion Design</div>
+            <div class="gallery" id="motionGallery"></div>
+
+            <!-- GALERIE -->
+            <div class="section-title">🖼️ Galerie</div>
+            <div class="gallery" id="galleryGallery"></div>
         </div>
 
-        <div class="section">
-            <div class="section-header">
-                <h2>Badge Couleur</h2>
+        <!-- CONTACT SECTION -->
+        <div id="contact" class="section">
+            <div class="contact">
+                <h2>Envoyez-moi un message</h2>
+                <form id="contactForm">
+                    <input type="text" id="name" placeholder="Ton nom" required>
+                    <input type="email" id="email" placeholder="Ton email" required>
+                    <textarea id="message" placeholder="Ton message" required></textarea>
+                    <div class="btn-group">
+                        <button type="button" class="btn" onclick="sendDiscord()">Discord</button>
+                        <button type="submit" class="btn">Email</button>
+                    </div>
+                    <div id="status"></div>
+                </form>
             </div>
-            <div class="grid grid-small" id="badgeCouleur"></div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">
-                <h2>Badge Différent</h2>
-            </div>
-            <div class="grid grid-small" id="badgeDifferent"></div>
-        </div>
-
-        <!-- Emotes -->
-        <div class="section">
-            <div class="section-header">
-                <h2>Emote</h2>
-            </div>
-            <div class="subsection-header"><h3>Fixe</h3></div>
-            <div class="grid grid-small" id="emotesFixe"></div>
-
-            <div class="subsection-header"><h3>Animée</h3></div>
-            <div class="grid grid-small" id="emotesAnimee"></div>
-        </div>
-
-        <!-- Motion Design -->
-        <div class="section">
-            <div class="section-header">
-                <h2>Motion Design</h2>
-                <span class="interact-hint">— Survolez pour animer —</span>
-            </div>
-            <div class="subsection-header"><h3>Alerte Animée</h3></div>
-            <div class="grid grid-large" id="alertesAnimees"></div>
-
-            <div class="subsection-header"><h3>Alerte Twitch</h3></div>
-            <div class="grid grid-large" id="alertesTwitch"></div>
-
-            <div class="subsection-header"><h3>Transition Motion</h3></div>
-            <div class="grid grid-large" id="transitionsMotion"></div>
-
-            <div class="subsection-header"><h3>Transition Handdrawn</h3></div>
-            <div class="grid grid-large" id="transitionsHanddrawn"></div>
-        </div>
-
-        <!-- Stream Assets -->
-        <div class="section">
-            <div class="section-header">
-                <h2>Stream Asset</h2>
-                <span class="interact-hint">— Survolez pour animer —</span>
-            </div>
-            <div class="grid grid-large" id="streamAssets"></div>
-        </div>
-
-        <!-- Galerie -->
-        <div class="section" id="galerie">
-            <div class="section-header">
-                <h2>Galerie Illustration</h2>
-                <span class="interact-hint">— Cliquez pour agrandir —</span>
-            </div>
-            <div class="grid grid-large" id="galerieItems"></div>
-        </div>
-
-        <!-- Contact Form -->
-        <div class="contact-section" id="contact">
-            <h2>Get in Touch</h2>
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="name">Nom</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <div class="contact-buttons">
-                    <button type="button" class="contact-btn discord" id="discordBtn">
-                        Discord
-                    </button>
-                    <button type="submit" class="contact-btn" id="emailBtn">
-                        Email
-                    </button>
-                </div>
-                <div class="status-message" id="statusMessage"></div>
-            </form>
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer>
-        <p><strong>Raptoru_</strong> | Animateur 2D • Motion Designer • Graphiste</p>
-        <p>Créatrice de contenu pour streamers</p>
-        <div class="social-links">
-            <a href="https://twitch.tv/raptorutwitch" target="_blank">Twitch</a>
-            <a href="https://tiktok.com" target="_blank">TikTok</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <p style="margin-top: 25px; font-size: 0.75rem; opacity: 0.4;">© 2024 Raptoru_. All rights reserved.</p>
-    </footer>
-
-    <!-- Lightbox -->
     <div id="lightbox">
         <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <img id="lightboxImg" style="display: none;" alt="">
-        <video id="lightboxVideo" style="display: none;" controls></video>
+        <img id="lightboxImg" style="display:none;">
+        <video id="lightboxVideo" style="display:none;" controls></video>
     </div>
 
+    <footer>
+        <p><strong>RAPTORU_</strong> - Créatrice de contenu</p>
+        <p style="margin-top:15px;">
+            <a href="https://twitch.tv/raptorutwitch" style="color:#ff6b00;text-decoration:none;margin:0 10px;">Twitch</a>
+            <a href="https://tiktok.com" style="color:#ff6b00;text-decoration:none;margin:0 10px;">TikTok</a>
+        </p>
+        <p style="margin-top:20px;font-size:0.85rem;">© 2024 Raptoru_</p>
+    </footer>
+
     <script>
-        const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1503918156022808597/Bks1v2ZFlVTMPD2liRIBouvWNZmjgreyp9EjCwWKtnppcXp0h0zwFTUYQQoQsGvo-Bpw';
-        
-        const galleryData = {
-            badgeEvolutif: [
-                'PabloRacine et detruit.png',
-                'PabloUn peu abime.png',
-                'PabloPropre.png',
-                'PabloPropre neuf.png',
-                'PabloFlashy.png'
-            ],
-            badgeCouleur: [
-                'Badge NhsBlanc.png',
-                'Badge NhsBleu.png',
-                'Badge NhsJaune.png',
-                'Badge NhsRose.png',
-                'Badge Nhsrouge.png'
-            ],
-            badgeDifferent: [
-                '1. UglyTitan.png',
-                '2. CartTtian.png',
-                '5. ArmoredTitan.png',
-                '6. ColossalTitan.png',
-                '7. BeastTitan.png'
-            ],
-            emotesFixe: [
-                'Pog.png',
-                'Flex megumin.png',
-                'Roooh.png',
-                'Grrr seance UV.png',
-                'Raptor sadge Fixed.png'
-            ],
-            emotesAnimee: [
-                'AhooV2.gif',
-                'Kirby_Fixed.gif',
-                'Boude.gif',
-                'HelloKnight_.gif',
-                'Bobombe Finale.gif'
-            ],
-            alertesAnimees: [
-                { file: 'Nuage 2.gif', label: 'Alerte animée Nuage' },
-                { file: 'NuageComplet.gif', label: 'Alerte animée nuage (Variante)' },
-                { file: 'Waterbending.gif', label: 'Alerte animée eau' },
-                { file: 'Alerte R-M RB 1.gif', label: 'Alerte animée Rick&Morty' }
-            ],
-            alertesTwitch: [
-                { file: 'alertefollowEren.gif', label: 'Alerte Follow (Eren)' },
-                { file: 'Alerte raid.gif', label: 'Alerte Raid' },
-                { file: 'Alerte Sub 5.gif', label: 'Alerte subgift' }
-            ],
-            transitionsMotion: [
-                { file: 'Appareil-photo.gif', label: 'Transition Obturateur' },
-                { file: 'Pixel-Vitrine.gif', label: 'Transition Pixel' },
-                { file: 'rectanglemotion.gif', label: 'Rectangle Motion' },
-                { file: 'animationcerclemotion.gif', label: 'Cercle Vitrine' }
-            ],
-            transitionsHanddrawn: [
-                { file: 'Video-Eau.gif', label: 'Transition Eau' },
-                { file: 'video-feu.gif', label: 'Transition Feu' },
-                { file: 'Video-Terre.gif', label: 'Transition Terre' },
-                { file: 'Video-Wind.gif', label: 'Transition Vent' }
-            ],
-            streamAssets: [
-                { file: 'startingscreen.gif', label: 'Starting Screen' },
-                { file: 'streamending.gif', label: 'Stream Ending' },
-                { file: 'Overlay SubCam.gif', label: 'Overlay Cam' }
-            ],
-            galerie: [
-                { file: 'C21BOOBS.gif', label: 'C21' },
-                { file: 'MikasaFiligraned.gif', label: 'Mikasa' },
-                { file: 'Filigraned Daki.png', label: 'Daki' },
-                { file: 'ayanokoji.png', label: 'Ayanokoji' },
-                { file: 'Coqueline Filigraned.png', label: 'Coqueline' },
-                { file: 'Qilby Filigraned.png', label: 'Qilby' },
-                { file: 'banneer.png', label: 'Bannière Twitch' }
-            ]
+        const WEBHOOK = 'https://discord.com/api/webhooks/1503918156022808597/Bks1v2ZFlVTMPD2liRIBouvWNZmjgreyp9EjCwWKtnppcXp0h0zwFTUYQQoQsGvo-Bpw';
+
+        // Pattern matching pour catégoriser les fichiers
+        const patterns = {
+            badges: ['UglyTitan', 'CartTitan', 'ArmoredTitan', 'ColossalTitan', 'BeastTitan', 'Nhs', 'Pablo'],
+            emotes: ['Pog', 'Flex', 'Roooh', 'Grrr', 'Raptor', 'AhooV2', 'Kirby', 'Boude', 'HelloKnight', 'Bobombe', 'Waaah', 'Jaune', 'Bleu', 'Rose', 'rouge'],
+            motion: ['Alerte', 'Transition', 'Cercle', 'Rectangle', 'Pixel', 'Appareil', 'Starting', 'Ending', 'Nuage', 'Video', 'Asset', 'Arrow', 'Dofus', 'CSC', 'Intermission', 'Waterbending', 'Rick', 'RB', 'Eeau', 'Cam', 'Page', 'Just', 'Jerry', 'Template', 'Feu', '[NHS]'],
+            gallery: ['C21', 'Mikasa', 'Daki', 'Ayanokoji', 'Coqueline', 'Qilby', 'Avatar', 'bannière']
         };
 
-        function renderGallery(containerId, items, isMotionDesign = false) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = '';
-            
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
+        async function loadImages() {
+            try {
+                // Charge les images depuis les dossiers
+                const imageFiles = await getFilesFromFolder('images');
+                const videoFiles = await getFilesFromFolder('videos');
                 
-                const filename = typeof item === 'string' ? item : item.file;
-                const label = typeof item === 'string' ? '' : item.label;
-                const isGif = filename.endsWith('.gif');
-                const imagePath = `images/${filename}`;
-                
-                if (isMotionDesign) {
-                    card.innerHTML = `
-                        <div class="img-placeholder"></div>
-                        ${label ? `<div class="card-label">${label}</div>` : ''}
-                    `;
-                    card.addEventListener('mouseover', () => {
-                        card.querySelector('.img-placeholder').style.backgroundImage = `url('${imagePath}')`;
-                    });
-                    card.addEventListener('mouseout', () => {
-                        card.querySelector('.img-placeholder').style.backgroundImage = 'none';
-                    });
-                    card.addEventListener('click', () => openLightbox(imagePath, isGif));
-                } else {
-                    card.innerHTML = `
-                        <img src="${imagePath}" alt="${label}" loading="lazy">
-                        ${label ? `<div class="card-label">${label}</div>` : ''}
-                    `;
-                    card.addEventListener('click', () => openLightbox(imagePath, isGif));
-                }
-                
-                container.appendChild(card);
-            });
+                categorizeAndDisplay(imageFiles, videoFiles);
+            } catch (e) {
+                console.log('Chargement dynamique non disponible, utilisation des patterns');
+                loadWithPatterns();
+            }
         }
 
-        function openLightbox(src, isVideo = false) {
-            const lightbox = document.getElementById('lightbox');
+        function loadWithPatterns() {
+            // Fallback: charge basé sur les patterns
+            const imagePath = 'images/';
+            const videoPath = 'videos/';
+
+            // Badges
+            let badgesHtml = '';
+            ['1. UglyTitan.png', '2. CartTtian.png', '5. ArmoredTitan.png', '6. ColossalTitan.png', '7. BeastTitan.png', 'Badge NhsBlanc.png', 'Badge NhsBleu.png', 'Badge NhsJaune.png', 'Badge NhsRose.png', 'Badge Nhsrouge.png'].forEach(f => {
+                badgesHtml += createCard(imagePath + f, f);
+            });
+            document.getElementById('badgesGallery').innerHTML = badgesHtml;
+
+            // Emotes
+            let emotesHtml = '';
+            ['Pog.png', 'Waaah.png', 'Flex megumin.png', 'Roooh.png', 'Grrr séance UV.png', 'Raptor sadge Fixed.png', 'AhooV2.gif', 'Kirby_Fixed.gif', 'Boude.gif', 'HelloKnight_.gif', 'Bobombe Finale.gif'].forEach(f => {
+                emotesHtml += createCard(imagePath + f, f);
+            });
+            document.getElementById('emotesGallery').innerHTML = emotesHtml;
+
+            // Motion
+            let motionHtml = '';
+            ['Alerte raid exemple.mp4', 'Appareil photo exemple 2.mp4', 'Cercle exemple.mp4', 'Pixel Exemple.mp4', 'Rectangle.mp4', 'Starting Screen.mp4', 'Ending Screen fixed.mp4', 'Nuage Classique.mp4', 'Video Terre.mp4', 'Video Wind.mp4', 'Vidéo Eau.mp4', 'Transition Feu.mp4', 'Dofus Alerte.mp4', 'Rick&Morty_1.mp4'].forEach(f => {
+                motionHtml += createCard(videoPath + f, f);
+            });
+            document.getElementById('motionGallery').innerHTML = motionHtml;
+
+            // Galerie
+            let gallerieHtml = '';
+            ['C21 Gif.gif', 'Mikasa TTS.gif', 'Filigraned Daki.png', 'Filigraned Ayanokoji.png', 'Coqueline Filigraned.png', 'Qilby Filigraned.png', 'Avatar.mp4'].forEach(f => {
+                const path = f.endsWith('.mp4') ? videoPath : imagePath;
+                gallerieHtml += createCard(path + f, f);
+            });
+            document.getElementById('galleryGallery').innerHTML = gallerieHtml;
+        }
+
+        function createCard(src, name) {
+            const isVideo = src.endsWith('.mp4') || src.endsWith('.webm');
+            const html = isVideo 
+                ? `<div class="card" onclick="openLightbox('${src}', true)"><video style="width:100%;height:180px;object-fit:cover;" src="${src}"></video><div class="card-label">${name}</div></div>`
+                : `<div class="card" onclick="openLightbox('${src}', false)"><img src="${src}" class="card-img" onerror="this.style.display='none'"><div class="card-label">${name}</div></div>`;
+            return html;
+        }
+
+        function openLightbox(src, isVideo) {
+            const lb = document.getElementById('lightbox');
             const img = document.getElementById('lightboxImg');
-            const video = document.getElementById('lightboxVideo');
+            const vid = document.getElementById('lightboxVideo');
             
             if (isVideo) {
                 img.style.display = 'none';
-                video.style.display = 'block';
-                video.src = src;
+                vid.style.display = 'block';
+                vid.src = src;
             } else {
-                video.style.display = 'none';
+                vid.style.display = 'none';
                 img.style.display = 'block';
                 img.src = src;
             }
-            
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            lb.classList.add('active');
         }
 
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
+            document.getElementById('lightbox').classList.remove('active');
             document.getElementById('lightboxVideo').pause();
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
-        });
-
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target.id === 'lightbox') closeLightbox();
-        });
-
-        // Contact Form
-        const contactForm = document.getElementById('contactForm');
-        const discordBtn = document.getElementById('discordBtn');
-        const emailBtn = document.getElementById('emailBtn');
-        const statusMessage = document.getElementById('statusMessage');
-
-        discordBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            if (!name || !email || !message) {
-                showStatus('Remplis tous les champs svp', 'error');
-                return;
-            }
-
-            discordBtn.disabled = true;
-            discordBtn.innerHTML = 'Envoi<span class="spinner"></span>';
-
-            try {
-                const response = await fetch(DISCORD_WEBHOOK, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        embeds: [{
-                            title: '📩 Nouveau Contact Portfolio',
-                            color: 0x00d4d4,
-                            fields: [
-                                { name: 'Nom', value: name, inline: true },
-                                { name: 'Email', value: email, inline: true },
-                                { name: 'Message', value: message }
-                            ],
-                            timestamp: new Date()
-                        }]
-                    })
-                });
-
-                if (response.ok) {
-                    showStatus('Message envoyé sur Discord ! ✓', 'success');
-                    contactForm.reset();
-                    setTimeout(() => { discordBtn.disabled = false; discordBtn.innerHTML = 'Discord'; }, 2000);
-                } else {
-                    throw new Error('Discord send failed');
-                }
-            } catch (error) {
-                showStatus('Erreur Discord', 'error');
-                discordBtn.disabled = false;
-                discordBtn.innerHTML = 'Discord';
-            }
-        });
-
-        emailBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            if (!name || !email || !message) {
-                showStatus('Remplis tous les champs svp', 'error');
-                return;
-            }
-
-            emailBtn.disabled = true;
-            emailBtn.innerHTML = 'Envoi<span class="spinner"></span>';
-
-            try {
-                const response = await fetch('https://formspree.io/f/mnqzjonb', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, message })
-                });
-
-                if (response.ok) {
-                    showStatus('Message envoyé par email ! ✓', 'success');
-                    contactForm.reset();
-                    setTimeout(() => { emailBtn.disabled = false; emailBtn.innerHTML = 'Email'; }, 2000);
-                } else {
-                    throw new Error('Email send failed');
-                }
-            } catch (error) {
-                showStatus('Erreur Email', 'error');
-                emailBtn.disabled = false;
-                emailBtn.innerHTML = 'Email';
-            }
-        });
-
-        function showStatus(msg, type) {
-            statusMessage.textContent = msg;
-            statusMessage.className = `status-message ${type}`;
-            setTimeout(() => { statusMessage.className = 'status-message'; }, 3000);
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
         }
 
-        // Initialize
-        renderGallery('badgeEvolutif', galleryData.badgeEvolutif);
-        renderGallery('badgeCouleur', galleryData.badgeCouleur);
-        renderGallery('badgeDifferent', galleryData.badgeDifferent);
-        renderGallery('emotesFixe', galleryData.emotesFixe);
-        renderGallery('emotesAnimee', galleryData.emotesAnimee);
-        renderGallery('alertesAnimees', galleryData.alertesAnimees, true);
-        renderGallery('alertesTwitch', galleryData.alertesTwitch, true);
-        renderGallery('transitionsMotion', galleryData.transitionsMotion, true);
-        renderGallery('transitionsHanddrawn', galleryData.transitionsHanddrawn, true);
-        renderGallery('streamAssets', galleryData.streamAssets, true);
-        renderGallery('galerieItems', galleryData.galerie);
+        function sendDiscord() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !message) {
+                showStatus('Remplis tous les champs!', false);
+                return;
+            }
+
+            fetch(WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    embeds: [{
+                        title: '📩 Nouveau Contact',
+                        color: 16744192,
+                        fields: [
+                            { name: 'Nom', value: name, inline: true },
+                            { name: 'Email', value: email, inline: true },
+                            { name: 'Message', value: message }
+                        ]
+                    }]
+                })
+            }).then(() => {
+                showStatus('Message envoyé sur Discord!', true);
+                document.getElementById('contactForm').reset();
+            }).catch(() => showStatus('Erreur Discord', false));
+        }
+
+        document.getElementById('contactForm').onsubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            fetch('https://formspree.io/f/mnqzjonb', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message })
+            }).then(() => {
+                showStatus('Email envoyé!', true);
+                document.getElementById('contactForm').reset();
+            }).catch(() => showStatus('Erreur Email', false));
+        };
+
+        function showStatus(msg, success) {
+            const status = document.getElementById('status');
+            status.textContent = msg;
+            status.className = success ? 'status-success' : 'status-error';
+            status.style.display = 'block';
+            setTimeout(() => status.style.display = 'none', 3000);
+        }
+
+        // Charge au démarrage
+        loadWithPatterns();
     </script>
 </body>
 </html>
