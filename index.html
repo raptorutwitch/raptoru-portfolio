@@ -26,7 +26,6 @@
 
     <main>
         <div id="portfolio" class="section active">
-            <!-- BADGES -->
             <div class="section-title">🎨 Badges</div>
             
             <div class="subsection-title">Badges Évolutif (Pablo)</div>
@@ -38,7 +37,6 @@
             <div class="subsection-title">Badges Différents (Titans)</div>
             <div class="gallery" id="badgesTitansGallery"></div>
 
-            <!-- EMOTES -->
             <div class="section-title">😊 Emotes</div>
             
             <div class="subsection-title">Fixe</div>
@@ -47,11 +45,9 @@
             <div class="subsection-title">Animée</div>
             <div class="gallery" id="emotesAnimeeGallery"></div>
 
-            <!-- MOTION DESIGN -->
             <div class="section-title">✨ Motion Design</div>
             <div class="gallery" id="motionGallery"></div>
 
-            <!-- GALERIE -->
             <div class="section-title">🖼️ Galerie</div>
             <div class="gallery" id="galleryGallery"></div>
         </div>
@@ -76,7 +72,7 @@
     <div id="lightbox">
         <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
         <img id="lightboxImg" style="display:none;">
-        <video id="lightboxVideo" style="display:none;" controls loop muted></video>
+        <video id="lightboxVideo" style="display:none;" controls loop></video>
     </div>
 
     <footer>
@@ -92,86 +88,27 @@
         const WEBHOOK = 'https://discord.com/api/webhooks/1503918156022808597/Bks1v2ZFlVTMPD2liRIBouvWNZmjgreyp9EjCwWKtnppcXp0h0zwFTUYQQoQsGvo-Bpw';
 
         const files = {
-            badgesPablo: [
-                '1Racine et détruit.png',
-                '2Abimé et sale.png',
-                '3.png',
-                '4.png',
-                '5Flashy.png'
-            ],
-            badgesNhs: [
-                'Bleu.png',
-                'Jaune.png',
-                'Rose.png',
-                'rouge.png',
-                'Multicolor.png'
-            ],
-            badgesTitans: [
-                '1. UglyTitan.png',
-                '2. CartTtian.png',
-                '5. ArmoredTitan.png',
-                '6. ColossalTitan.png',
-                '7. BeastTitan.png'
-            ],
-            emotesFixe: [
-                'Waaah.png',
-                'Flex megumin.png',
-                'Roooh.png',
-                'Grrr séance UV.png',
-                'Raptor sadge Fixed.png'
-            ],
-            emotesAnimee: [
-                'AhooV2.gif',
-                'Kirby_Fixed.gif',
-                'Boude.gif',
-                'HelloKnight_.gif',
-                'Bobombe Finale.gif'
-            ],
-            motion: [
-                'Alerte raid exemple.mp4',
-                'Appareil photo exemple 2.mp4',
-                'Arrow Exemple.mp4',
-                'Asset sub.mp4',
-                'Cercle exemple.mp4',
-                'CSC.mp4',
-                'Dofus Alerte.mp4',
-                'Eeau Anim.mp4',
-                'Ending Screen fixed.mp4',
-                'Intermission.mp4',
-                'Jerry Smith.mp4',
-                'Just Chatting.mp4',
-                'Nuage Classique.mp4',
-                'Nuage Rouge.mp4',
-                'Page exemple.mp4',
-                'Pixel Exemple.mp4',
-                'RB Classic.mp4',
-                'Rectangle.mp4',
-                'Rick&Morty_1.mp4',
-                'Starting Screen.mp4',
-                'Template Alerte follow.mp4',
-                'Transition Feu.mp4',
-                'Video Terre.mp4',
-                'Video Wind.mp4',
-                'Vidéo Eau.mp4',
-                '[NHS] Alerte Follow Final.mp4'
-            ],
-            gallery: [
-                'test bannière discord.png',
-                'C21TTS.gif',
-                'Mikasatts.gif',
-                'Daki.png',
-                'Ayanokoji PPClair.png',
-                'Coqueline Discord.png',
-                'Qilby Avatar 3 .png'
-            ]
+            badgesPablo: ['1Racine et détruit.png', '2Abimé et sale.png', '3.png', '4.png', '5Flashy.png'],
+            badgesNhs: ['Bleu.png', 'Jaune.png', 'Rose.png', 'rouge.png', 'Multicolor.png'],
+            badgesTitans: ['1. UglyTitan.png', '2. CartTtian.png', '5. ArmoredTitan.png', '6. ColossalTitan.png', '7. BeastTitan.png'],
+            emotesFixe: ['Waaah.png', 'Flex megumin.png', 'Roooh.png', 'Grrr séance UV.png', 'Raptor sadge Fixed.png'],
+            emotesAnimee: ['AhooV2.gif', 'Kirby_Fixed.gif', 'Boude.gif', 'HelloKnight_.gif', 'Bobombe Finale.gif'],
+            motion: ['Alerte raid exemple.mp4', 'Appareil photo exemple 2.mp4', 'Arrow Exemple.mp4', 'Asset sub.mp4', 'Cercle exemple.mp4', 'CSC.mp4', 'Dofus Alerte.mp4', 'Eeau Anim.mp4', 'Ending Screen fixed.mp4', 'Intermission.mp4', 'Jerry Smith.mp4', 'Just Chatting.mp4', 'Nuage Classique.mp4', 'Nuage Rouge.mp4', 'Page exemple.mp4', 'Pixel Exemple.mp4', 'RB Classic.mp4', 'Rectangle.mp4', 'Rick&Morty_1.mp4', 'Starting Screen.mp4', 'Template Alerte follow.mp4', 'Transition Feu.mp4', 'Video Terre.mp4', 'Video Wind.mp4', 'Vidéo Eau.mp4', '[NHS] Alerte Follow Final.mp4'],
+            gallery: ['test bannière discord.png', 'C21TTS.gif', 'Mikasatts.gif', 'Daki.png', 'Ayanokoji PPClair.png', 'Coqueline Discord.png', 'Qilby Avatar 3 .png']
         };
 
-        function createCard(filename, isGif = false) {
-            const isVideo = filename.endsWith('.mp4') || isGif;
-            const folder = 'images';
+        function getFolder(filename) {
+            if (filename.endsWith('.mp4')) return 'videos';
+            if (filename.endsWith('.gif')) return 'videos';
+            return 'images';
+        }
+
+        function createCard(filename) {
+            const folder = getFolder(filename);
             const src = folder + '/' + filename;
+            const isMedia = filename.endsWith('.mp4') || filename.endsWith('.gif');
             
-            if (isVideo) {
+            if (isMedia) {
                 return `<div class="card" onclick="openLightbox('${src}', true)"><video style="width:100%;height:180px;object-fit:cover;" muted loop playsinline><source src="${src}"></video><div class="card-label">${filename}</div></div>`;
             } else {
                 return `<div class="card" onclick="openLightbox('${src}', false)"><img src="${src}" class="card-img" alt="${filename}" onerror="this.parentElement.style.opacity='0.5'"><div class="card-label">${filename}</div></div>`;
@@ -179,46 +116,24 @@
         }
 
         function loadGallery() {
-            let html = '';
-            files.badgesPablo.forEach(f => { html += createCard(f, false); });
-            document.getElementById('badgesPabloGallery').innerHTML = html || '<div class="empty-message">Aucun badge trouvé</div>';
-
-            html = '';
-            files.badgesNhs.forEach(f => { html += createCard(f, false); });
-            document.getElementById('badgesNhsGallery').innerHTML = html || '<div class="empty-message">Aucun badge trouvé</div>';
-
-            html = '';
-            files.badgesTitans.forEach(f => { html += createCard(f, false); });
-            document.getElementById('badgesTitansGallery').innerHTML = html || '<div class="empty-message">Aucun badge trouvé</div>';
-
-            html = '';
-            files.emotesFixe.forEach(f => { html += createCard(f, false); });
-            document.getElementById('emotesFixeGallery').innerHTML = html || '<div class="empty-message">Aucune emote trouvée</div>';
-
-            html = '';
-            files.emotesAnimee.forEach(f => { html += createCard(f, true); });
-            document.getElementById('emotesAnimeeGallery').innerHTML = html || '<div class="empty-message">Aucune emote trouvée</div>';
-
-            html = '';
-            files.motion.forEach(f => { html += createCard(f, false); });
-            document.getElementById('motionGallery').innerHTML = html || '<div class="empty-message">Aucune vidéo trouvée</div>';
-
-            html = '';
-            files.gallery.forEach(f => { html += createCard(f, f.endsWith('.gif')); });
-            document.getElementById('galleryGallery').innerHTML = html || '<div class="empty-message">Aucune image trouvée</div>';
+            document.getElementById('badgesPabloGallery').innerHTML = files.badgesPablo.map(createCard).join('') || '<div class="empty-message">Aucun badge trouvé</div>';
+            document.getElementById('badgesNhsGallery').innerHTML = files.badgesNhs.map(createCard).join('') || '<div class="empty-message">Aucun badge trouvé</div>';
+            document.getElementById('badgesTitansGallery').innerHTML = files.badgesTitans.map(createCard).join('') || '<div class="empty-message">Aucun badge trouvé</div>';
+            document.getElementById('emotesFixeGallery').innerHTML = files.emotesFixe.map(createCard).join('') || '<div class="empty-message">Aucune emote trouvée</div>';
+            document.getElementById('emotesAnimeeGallery').innerHTML = files.emotesAnimee.map(createCard).join('') || '<div class="empty-message">Aucune emote trouvée</div>';
+            document.getElementById('motionGallery').innerHTML = files.motion.map(createCard).join('') || '<div class="empty-message">Aucune vidéo trouvée</div>';
+            document.getElementById('galleryGallery').innerHTML = files.gallery.map(createCard).join('') || '<div class="empty-message">Aucune image trouvée</div>';
         }
 
-        function openLightbox(src, isVideo) {
+        function openLightbox(src, isMedia) {
             const lb = document.getElementById('lightbox');
             const img = document.getElementById('lightboxImg');
             const vid = document.getElementById('lightboxVideo');
             
-            if (isVideo) {
+            if (isMedia) {
                 img.style.display = 'none';
                 vid.style.display = 'block';
                 vid.src = src;
-                vid.loop = true;
-                vid.muted = true;
                 vid.play();
             } else {
                 vid.style.display = 'none';
@@ -244,30 +159,12 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
-            if (!name || !email || !message) {
-                showStatus('Remplis tous les champs!', false);
-                return;
-            }
-
+            if (!name || !email || !message) { showStatus('Remplis tous les champs!', false); return; }
             fetch(WEBHOOK, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    embeds: [{
-                        title: '📩 Nouveau Contact',
-                        color: 55508,
-                        fields: [
-                            { name: 'Nom', value: name, inline: true },
-                            { name: 'Email', value: email, inline: true },
-                            { name: 'Message', value: message }
-                        ]
-                    }]
-                })
-            }).then(() => {
-                showStatus('Message envoyé sur Discord!', true);
-                document.getElementById('contactForm').reset();
-            }).catch(() => showStatus('Erreur Discord', false));
+                body: JSON.stringify({ embeds: [{ title: '📩 Nouveau Contact', color: 55508, fields: [{ name: 'Nom', value: name, inline: true }, { name: 'Email', value: email, inline: true }, { name: 'Message', value: message }] }] })
+            }).then(() => { showStatus('Message envoyé sur Discord!', true); document.getElementById('contactForm').reset(); }).catch(() => showStatus('Erreur Discord', false));
         }
 
         document.getElementById('contactForm').onsubmit = (e) => {
@@ -275,15 +172,11 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
             fetch('https://formspree.io/f/mnqzjonb', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, message })
-            }).then(() => {
-                showStatus('Email envoyé!', true);
-                document.getElementById('contactForm').reset();
-            }).catch(() => showStatus('Erreur Email', false));
+            }).then(() => { showStatus('Email envoyé!', true); document.getElementById('contactForm').reset(); }).catch(() => showStatus('Erreur Email', false));
         };
 
         function showStatus(msg, success) {
