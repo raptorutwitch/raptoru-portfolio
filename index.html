@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPTORU_Test7 - Creative Studio</title>
+    <title>RAPTORU_Test8 - Creative Studio</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{--accent:#00d4d4;--bg:#050505;--card:#0c0c0c;--border:#1a1a1a;--text:#e0e0e0;--dim:#555}
@@ -64,14 +64,14 @@
 
         /* CARDS */
         .card{background:var(--card);border:1px solid var(--border);border-radius:5px;overflow:hidden;cursor:pointer;transition:all 0.3s ease;position:relative}
-        .card:hover{border-color:rgba(0,212,212,0.5);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,212,212,0.1)}
+        .card:hover{border-color:rgba(0,212,212,0.5);transform:translateY(-3px) scale(1.04);box-shadow:0 6px 20px rgba(0,212,212,0.1)}
         .card-media{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#080808}
         .card-sm .card-media{aspect-ratio:1/1}
         .card-label{padding:7px 8px;font-size:0.6rem;color:var(--dim);text-align:center;letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-        /* CARD GLOW - piano effect on borders */
-        .card.glow-active{border-color:var(--accent);box-shadow:0 0 15px rgba(0,212,212,0.2);transition:border-color 0.3s ease,box-shadow 0.3s ease}
-        .card.glow-fade{border-color:var(--border);box-shadow:none;transition:border-color 1s ease,box-shadow 1s ease}
+        /* CARD GLOW - piano effect on borders - blurry/diffus */
+        .card.glow-active{border-color:rgba(0,212,212,0.6);box-shadow:0 0 25px rgba(0,212,212,0.15),inset 0 0 8px rgba(0,212,212,0.05);transition:border-color 0.4s ease,box-shadow 0.4s ease}
+        .card.glow-fade{border-color:var(--border);box-shadow:none;transition:border-color 1.5s ease,box-shadow 1.5s ease}
 
         /* STAGGERED REVEAL */
         .stagger{opacity:0;transform:translateY(20px);transition:all 0.5s ease}
@@ -160,7 +160,7 @@
     <main>
         <div id="portfolio" class="page active">
 
-            <div class="cat-header reveal"><div class="cat-num">01</div><div class="cat-title">Badges</div><div class="cat-line"></div></div>
+            <div class="cat-header reveal"><div class="cat-title">Badges</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Évolutif</div>
             <div class="grid-sm reveal" id="g-badges-evo"></div>
             <div class="sub-header reveal">Couleur</div>
@@ -168,13 +168,13 @@
             <div class="sub-header reveal">Différents</div>
             <div class="grid-sm reveal" id="g-badges-diff"></div>
 
-            <div class="cat-header reveal"><div class="cat-num">02</div><div class="cat-title">Emotes</div><div class="cat-line"></div></div>
+            <div class="cat-header reveal"><div class="cat-title">Emotes</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Fixe</div>
             <div class="grid-sm reveal" id="g-emotes-fix"></div>
             <div class="sub-header reveal">Animée</div>
             <div class="grid-sm reveal" id="g-emotes-anim"></div>
 
-            <div class="cat-header reveal"><div class="cat-num">03</div><div class="cat-title">Asset Twitch</div><div class="cat-line"></div></div>
+            <div class="cat-header reveal"><div class="cat-title">Asset Twitch</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Overlay</div>
             <div class="grid-md reveal" id="g-overlay"></div>
             <div class="sub-header reveal">Écran d'attente</div>
@@ -186,16 +186,16 @@
             <div class="sub-header reveal">Alerte Sub</div>
             <div class="grid-md reveal" id="g-sub"></div>
 
-            <div class="cat-header reveal"><div class="cat-num">04</div><div class="cat-title">Alertes Animées</div><div class="cat-line"></div></div>
+            <div class="cat-header reveal"><div class="cat-title">Alertes Animées</div><div class="cat-line"></div></div>
             <div class="grid-md reveal" id="g-alertes-anim"></div>
 
-            <div class="cat-header reveal"><div class="cat-num">05</div><div class="cat-title">Transitions</div><div class="cat-line"></div></div>
+            <div class="cat-header reveal"><div class="cat-title">Transitions</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Motion Design</div>
             <div class="grid-md reveal" id="g-trans-motion"></div>
             <div class="sub-header reveal">Transition Animée</div>
             <div class="grid-md reveal" id="g-trans-anim"></div>
 
-            <div class="cat-header reveal"><div class="cat-num">06</div><div class="cat-title">Galerie</div><div class="cat-line"></div></div>
+            <div class="cat-header reveal"><div class="cat-title">Galerie</div><div class="cat-line"></div></div>
             <div class="grid-lg reveal" id="g-gallery"></div>
         </div>
 
@@ -324,14 +324,8 @@
             setTimeout(sweepGrid,3000);
         }
 
-        // PARALLAX
-        function initParallax(){
-            const bg=document.getElementById('parallaxBg');
-            window.addEventListener('scroll',()=>{
-                const s=window.pageYOffset;
-                if(s<800)bg.style.transform='translateY('+s*0.3+'px)';
-            },{passive:true});
-        }
+        // PARALLAX désactivé (lag)
+        function initParallax(){}
 
         // STAGGERED CARD REVEAL
         function initStagger(){
