@@ -3,79 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPTORU_Test6 - Creative Studio</title>
+    <title>RAPTORU_Test7 - Creative Studio</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--accent:#00d4d4;--bg:#050505;--card:#111;--border:#1a1a1a;--text:#e0e0e0;--dim:#666}
+        :root{--accent:#00d4d4;--bg:#050505;--card:#0c0c0c;--border:#1a1a1a;--text:#e0e0e0;--dim:#555}
         body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
         ::selection{background:var(--accent);color:#000}
 
-        /* ANIMATED BG - Aurore boréale subtile */
-        .bg-aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-        .bg-aurora .wave{position:absolute;width:200%;height:300px;opacity:0.035;filter:blur(80px);animation:aurora 20s ease-in-out infinite}
-        .bg-aurora .wave:nth-child(1){background:linear-gradient(90deg,transparent,#00d4d4,#0088aa,transparent);top:15%;left:-50%;animation-duration:22s}
-        .bg-aurora .wave:nth-child(2){background:linear-gradient(90deg,transparent,#0088aa,#00d4d4,transparent);top:45%;left:-30%;animation-duration:28s;animation-delay:-5s}
-        .bg-aurora .wave:nth-child(3){background:linear-gradient(90deg,transparent,#005566,#00d4d4,transparent);top:75%;left:-40%;animation-duration:25s;animation-delay:-12s}
-        @keyframes aurora{0%,100%{transform:translateX(-20%) skewY(-2deg)}50%{transform:translateX(20%) skewY(2deg)}}
+        /* FILM GRAIN */
+        .grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-        /* HEADER - PARALLAX */
+        /* HEADER */
         header{position:relative;height:100vh;max-height:750px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-        .header-bg{position:absolute;inset:-50px;background:url('images/test bannière discord.png') center/cover;opacity:0.25;filter:blur(2px);will-change:transform}
-        .header-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0.2) 0%,rgba(5,5,5,0.7) 60%,var(--bg) 100%)}
+        .header-bg{position:absolute;inset:-50px;background:url('images/test bannière discord.png') center/cover;opacity:0.2;filter:blur(3px);will-change:transform}
+        .header-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0.1) 0%,rgba(5,5,5,0.75) 65%,var(--bg) 100%)}
         .header-content{position:relative;z-index:2;text-align:center;padding:0 20px}
-        .profile-pic{width:180px;height:180px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;box-shadow:0 0 60px rgba(0,212,212,0.35);animation:fadeUp 0.8s ease;transition:box-shadow 0.5s}
-        .profile-pic:hover{box-shadow:0 0 80px rgba(0,212,212,0.5)}
+        .profile-pic{width:170px;height:170px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;box-shadow:0 0 50px rgba(0,212,212,0.25);animation:fadeUp 0.8s ease;transition:all 0.5s}
+        .profile-pic:hover{box-shadow:0 0 70px rgba(0,212,212,0.4);transform:scale(1.03)}
         @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         .header-content h1{font-size:clamp(2.8rem,8vw,5rem);font-weight:900;letter-spacing:-2px;margin:25px 0 12px;background:linear-gradient(135deg,#fff 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp 0.8s ease 0.1s both}
-        .tagline{font-size:1rem;color:var(--accent);letter-spacing:3px;text-transform:uppercase;font-weight:600;animation:fadeUp 0.8s ease 0.2s both}
-        .bio{font-size:0.9rem;color:var(--dim);margin-top:12px;animation:fadeUp 0.8s ease 0.3s both}
-        .header-cta{margin-top:35px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.8s ease 0.4s both}
-        .header-cta a{padding:10px 28px;border:1.5px solid var(--accent);color:var(--accent);text-decoration:none;border-radius:4px;font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
+        .tagline{font-size:0.9rem;color:var(--accent);letter-spacing:4px;text-transform:uppercase;font-weight:600;animation:fadeUp 0.8s ease 0.2s both}
+        .bio{font-size:0.85rem;color:var(--dim);margin-top:12px;animation:fadeUp 0.8s ease 0.3s both}
+        .header-cta{margin-top:35px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.8s ease 0.4s both}
+        .header-cta a{padding:9px 24px;border:1.5px solid var(--accent);color:var(--accent);text-decoration:none;border-radius:3px;font-size:0.8rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.3s}
         .header-cta a:hover{background:var(--accent);color:#000}
         .header-cta a.filled{background:var(--accent);color:#000}
         .header-cta a.filled:hover{background:transparent;color:var(--accent)}
         .header-cta a.discord{border-color:#5865F2;color:#5865F2}
         .header-cta a.discord:hover{background:#5865F2;color:#fff}
-        .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;animation:bounce 2s infinite}
-        @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+        .scroll-hint{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;animation:bounce 2s infinite}
+        @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+        /* STATS BAR */
+        .stats-bar{max-width:1200px;margin:0 auto;padding:20px 20px 0;display:flex;justify-content:center;gap:30px;opacity:0.4;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+        .stats-bar span{font-weight:700}
 
         /* STICKY NAV */
         .sticky-nav{position:sticky;top:0;z-index:100;background:rgba(5,5,5,0.92);backdrop-filter:blur(25px);border-bottom:1px solid var(--border);padding:12px 0}
         .sticky-nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:8px;padding:0 20px;flex-wrap:wrap}
-        .sticky-nav button{background:transparent;color:var(--dim);border:none;padding:8px 16px;cursor:pointer;font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;border-radius:3px}
+        .sticky-nav button{background:transparent;color:var(--dim);border:none;padding:8px 16px;cursor:pointer;font-size:0.75rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.3s;border-radius:3px}
         .sticky-nav button:hover{color:var(--accent)}
-        .sticky-nav button.active{color:var(--accent);background:rgba(0,212,212,0.1)}
+        .sticky-nav button.active{color:var(--accent);background:rgba(0,212,212,0.08)}
 
         /* MAIN */
-        main{max-width:1200px;margin:0 auto;padding:40px 20px}
+        main{max-width:1200px;margin:0 auto;padding:30px 20px}
         .page{display:none}
         .page.active{display:block}
 
-        /* SECTION HEADERS */
-        .cat-header{margin:70px 0 25px;display:flex;align-items:center;gap:15px}
-        .cat-header h2{font-size:1.1rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);font-weight:700;white-space:nowrap}
-        .cat-header .line{flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
-        .sub-header{margin:25px 0 15px;font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:600;padding-left:2px}
+        /* MAGAZINE SECTION HEADERS */
+        .cat-header{margin:80px 0 20px;display:flex;align-items:baseline;gap:18px}
+        .cat-num{font-size:3rem;font-weight:900;color:rgba(0,212,212,0.12);line-height:1;letter-spacing:-2px;font-family:Georgia,'Times New Roman',serif}
+        .cat-title{font-size:0.9rem;text-transform:uppercase;letter-spacing:4px;color:var(--accent);font-weight:700}
+        .cat-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(0,212,212,0.3),transparent)}
+        .sub-header{margin:20px 0 12px;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:600;padding-left:2px}
 
         /* GRIDS */
-        .grid-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-bottom:30px;position:relative;overflow:visible}
-        .grid-md{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:30px;position:relative;overflow:visible}
-        .grid-lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;margin-bottom:30px}
-
-        /* PIANO GLOW */
-        .glow-line{position:relative}
-        .glow-line::after{content:'';position:absolute;top:-5px;bottom:-5px;width:150px;background:radial-gradient(ellipse,rgba(0,212,212,0.15),transparent 70%);opacity:0;pointer-events:none;z-index:0;transition:opacity 0.8s ease;left:0}
-        .glow-line.glowing::after{animation:pianoSweep 2s ease-in-out forwards}
-        @keyframes pianoSweep{0%{left:-150px;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
+        .grid-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:8px;margin-bottom:25px;position:relative}
+        .grid-md{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:25px;position:relative}
+        .grid-lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:25px}
 
         /* CARDS */
-        .card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.25s ease;position:relative;z-index:1}
-        .card:hover{border-color:rgba(0,212,212,0.4);transform:translateY(-4px);box-shadow:0 8px 25px rgba(0,212,212,0.12)}
-        .card-media{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#0a0a0a}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:5px;overflow:hidden;cursor:pointer;transition:all 0.3s ease;position:relative}
+        .card:hover{border-color:rgba(0,212,212,0.5);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,212,212,0.1)}
+        .card-media{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#080808}
         .card-sm .card-media{aspect-ratio:1/1}
-        .card-label{padding:8px 10px;font-size:0.65rem;color:var(--dim);text-align:center;letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-        .card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,212,212,0.04));opacity:0;transition:opacity 0.3s;pointer-events:none}
-        .card:hover::after{opacity:1}
+        .card-label{padding:7px 8px;font-size:0.6rem;color:var(--dim);text-align:center;letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+        /* CARD GLOW - piano effect on borders */
+        .card.glow-active{border-color:var(--accent);box-shadow:0 0 15px rgba(0,212,212,0.2);transition:border-color 0.3s ease,box-shadow 0.3s ease}
+        .card.glow-fade{border-color:var(--border);box-shadow:none;transition:border-color 1s ease,box-shadow 1s ease}
+
+        /* STAGGERED REVEAL */
+        .stagger{opacity:0;transform:translateY(20px);transition:all 0.5s ease}
+        .stagger.visible{opacity:1;transform:translateY(0)}
 
         /* Preview bar */
         .preview-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0;z-index:5}
@@ -83,58 +83,53 @@
         /* LIGHTBOX */
         #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:9999;align-items:center;justify-content:center}
         #lightbox.active{display:flex}
-        #lightbox img,#lightbox video{max-width:92%;max-height:85%;border-radius:6px;object-fit:contain}
+        #lightbox img,#lightbox video{max-width:92%;max-height:85%;border-radius:5px;object-fit:contain}
         .lb-close{position:absolute;top:15px;right:20px;font-size:1.8rem;color:var(--dim);cursor:pointer;background:none;border:none;transition:all 0.2s;z-index:10001;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
         .lb-close:hover{color:#fff;background:rgba(255,255,255,0.1)}
-        .lb-mute{position:absolute;bottom:20px;right:20px;background:rgba(0,212,212,0.2);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;z-index:10001;transition:all 0.3s}
+        .lb-mute{position:absolute;bottom:20px;right:20px;background:rgba(0,212,212,0.15);border:1px solid rgba(0,212,212,0.4);color:var(--accent);padding:8px 16px;border-radius:3px;cursor:pointer;font-size:0.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;z-index:10001;transition:all 0.3s}
         .lb-mute:hover{background:var(--accent);color:#000}
 
         /* CONTACT */
-        .contact-wrap{max-width:500px;margin:60px auto;padding:35px;background:var(--card);border:1px solid var(--border);border-radius:8px}
-        .contact-wrap h2{font-size:1rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:25px;font-weight:700}
-        .contact-note{font-size:0.75rem;color:var(--dim);margin-bottom:20px;line-height:1.6;font-style:italic}
-        .field{margin-bottom:18px}
-        .field label{display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:6px;font-weight:600}
-        .field input,.field textarea{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-family:inherit;font-size:0.9rem;transition:border 0.3s}
+        .contact-wrap{max-width:480px;margin:50px auto;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:6px}
+        .contact-wrap h2{font-size:0.85rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:8px;font-weight:700}
+        .contact-note{font-size:0.7rem;color:var(--dim);margin-bottom:22px;line-height:1.6;font-style:italic}
+        .field{margin-bottom:16px}
+        .field label{display:block;font-size:0.65rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:5px;font-weight:600}
+        .field input,.field textarea{width:100%;padding:9px 11px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:3px;font-family:inherit;font-size:0.85rem;transition:border 0.3s}
         .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-        .field textarea{resize:vertical;min-height:100px}
-        .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
-        .btn{padding:10px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;border-radius:4px;font-weight:700;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
+        .field textarea{resize:vertical;min-height:90px}
+        .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+        .btn{padding:9px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;border-radius:3px;font-weight:700;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
         .btn:hover{background:var(--accent);color:#000}
-        #status{margin-top:12px;padding:10px;border-radius:4px;text-align:center;display:none;font-size:0.85rem}
+        #status{margin-top:10px;padding:8px;border-radius:3px;text-align:center;display:none;font-size:0.8rem}
         .status-success{background:rgba(0,212,212,0.1);color:var(--accent);border:1px solid rgba(0,212,212,0.3);display:block}
         .status-error{background:rgba(244,67,54,0.1);color:#f44336;border:1px solid rgba(244,67,54,0.3);display:block}
 
         /* FOOTER */
-        footer{margin-top:80px;padding:40px 20px;border-top:1px solid var(--border);text-align:center}
-        footer p{color:var(--dim);font-size:0.8rem;margin:5px 0}
-        footer a{color:var(--accent);text-decoration:none;font-weight:600;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;margin:0 12px;transition:opacity 0.3s}
+        footer{margin-top:80px;padding:35px 20px;border-top:1px solid var(--border);text-align:center}
+        footer p{color:var(--dim);font-size:0.75rem;margin:4px 0}
+        footer a{color:var(--accent);text-decoration:none;font-weight:600;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;margin:0 10px;transition:opacity 0.3s}
         footer a:hover{opacity:0.7}
-        footer a.discord-link{color:#5865F2}
+        footer a.dc{color:#5865F2}
 
-        /* SCROLL ANIMATIONS */
-        .reveal{opacity:0;transform:translateY(25px);transition:all 0.6s ease}
+        /* REVEAL */
+        .reveal{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
         .reveal.visible{opacity:1;transform:translateY(0)}
 
         @media(max-width:768px){
             header{max-height:550px}
-            .profile-pic{width:140px;height:140px}
+            .profile-pic{width:130px;height:130px}
+            .cat-num{font-size:2rem}
             .grid-sm{grid-template-columns:repeat(auto-fill,minmax(70px,1fr))}
             .grid-md{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
             .grid-lg{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
             .btn-row{grid-template-columns:1fr}
-            .header-cta{gap:10px}
-            .header-cta a{padding:8px 18px;font-size:0.75rem}
+            .stats-bar{gap:15px;font-size:0.6rem}
         }
     </style>
 </head>
 <body>
-    <!-- Aurore boréale -->
-    <div class="bg-aurora">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-    </div>
+    <div class="grain"></div>
 
     <header id="hero">
         <div class="header-bg" id="parallaxBg"></div>
@@ -160,59 +155,62 @@
         </div>
     </nav>
 
+    <div class="stats-bar"><span id="totalCount">0</span> projets • <span id="catCount">0</span> catégories</div>
+
     <main>
         <div id="portfolio" class="page active">
-            <div class="cat-header reveal"><h2>Badges</h2><div class="line"></div></div>
+
+            <div class="cat-header reveal"><div class="cat-num">01</div><div class="cat-title">Badges</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Évolutif</div>
-            <div class="grid-sm glow-line reveal" id="g-badges-evo"></div>
+            <div class="grid-sm reveal" id="g-badges-evo"></div>
             <div class="sub-header reveal">Couleur</div>
-            <div class="grid-sm glow-line reveal" id="g-badges-col"></div>
+            <div class="grid-sm reveal" id="g-badges-col"></div>
             <div class="sub-header reveal">Différents</div>
-            <div class="grid-sm glow-line reveal" id="g-badges-diff"></div>
+            <div class="grid-sm reveal" id="g-badges-diff"></div>
 
-            <div class="cat-header reveal"><h2>Emotes</h2><div class="line"></div></div>
+            <div class="cat-header reveal"><div class="cat-num">02</div><div class="cat-title">Emotes</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Fixe</div>
-            <div class="grid-sm glow-line reveal" id="g-emotes-fix"></div>
+            <div class="grid-sm reveal" id="g-emotes-fix"></div>
             <div class="sub-header reveal">Animée</div>
-            <div class="grid-sm glow-line reveal" id="g-emotes-anim"></div>
+            <div class="grid-sm reveal" id="g-emotes-anim"></div>
 
-            <div class="cat-header reveal"><h2>Asset Twitch</h2><div class="line"></div></div>
+            <div class="cat-header reveal"><div class="cat-num">03</div><div class="cat-title">Asset Twitch</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Overlay</div>
-            <div class="grid-md glow-line reveal" id="g-overlay"></div>
+            <div class="grid-md reveal" id="g-overlay"></div>
             <div class="sub-header reveal">Écran d'attente</div>
-            <div class="grid-md glow-line reveal" id="g-ecran"></div>
+            <div class="grid-md reveal" id="g-ecran"></div>
             <div class="sub-header reveal">Alerte Raid</div>
-            <div class="grid-md glow-line reveal" id="g-raid"></div>
+            <div class="grid-md reveal" id="g-raid"></div>
             <div class="sub-header reveal">Alerte Follow</div>
-            <div class="grid-md glow-line reveal" id="g-follow"></div>
+            <div class="grid-md reveal" id="g-follow"></div>
             <div class="sub-header reveal">Alerte Sub</div>
-            <div class="grid-md glow-line reveal" id="g-sub"></div>
+            <div class="grid-md reveal" id="g-sub"></div>
 
-            <div class="cat-header reveal"><h2>Alertes Animées</h2><div class="line"></div></div>
-            <div class="grid-md glow-line reveal" id="g-alertes-anim"></div>
+            <div class="cat-header reveal"><div class="cat-num">04</div><div class="cat-title">Alertes Animées</div><div class="cat-line"></div></div>
+            <div class="grid-md reveal" id="g-alertes-anim"></div>
 
-            <div class="cat-header reveal"><h2>Transitions</h2><div class="line"></div></div>
+            <div class="cat-header reveal"><div class="cat-num">05</div><div class="cat-title">Transitions</div><div class="cat-line"></div></div>
             <div class="sub-header reveal">Motion Design</div>
-            <div class="grid-md glow-line reveal" id="g-trans-motion"></div>
+            <div class="grid-md reveal" id="g-trans-motion"></div>
             <div class="sub-header reveal">Transition Animée</div>
-            <div class="grid-md glow-line reveal" id="g-trans-anim"></div>
+            <div class="grid-md reveal" id="g-trans-anim"></div>
 
-            <div class="cat-header reveal"><h2>Galerie</h2><div class="line"></div></div>
+            <div class="cat-header reveal"><div class="cat-num">06</div><div class="cat-title">Galerie</div><div class="cat-line"></div></div>
             <div class="grid-lg reveal" id="g-gallery"></div>
         </div>
 
         <div id="contact" class="page">
-            <div class="cat-header"><h2>Contact</h2><div class="line"></div></div>
+            <div class="cat-header"><div class="cat-num">✉</div><div class="cat-title">Contact</div><div class="cat-line"></div></div>
             <div class="contact-wrap">
                 <h2>Envoyez-moi un message</h2>
-                <p class="contact-note">N'oubliez pas de laisser un moyen pour que je puisse vous répondre (email, Discord, Twitter...)</p>
+                <p class="contact-note">Pensez à indiquer un moyen de vous recontacter — email, Discord, Twitter...</p>
                 <form id="contactForm">
                     <div class="field"><label>Pseudo / Nom</label><input type="text" id="name" placeholder="Comment vous appeler ?" required></div>
                     <div class="field"><label>Email</label><input type="email" id="email" placeholder="votre@email.com" required></div>
-                    <div class="field"><label>Message</label><textarea id="message" placeholder="Votre message..." required></textarea></div>
+                    <div class="field"><label>Message</label><textarea id="message" placeholder="Décrivez votre projet, vos idées..." required></textarea></div>
                     <div class="btn-row">
-                        <button type="button" class="btn" onclick="sendDiscord()">Discord</button>
-                        <button type="submit" class="btn">Email</button>
+                        <button type="button" class="btn" onclick="sendDiscord()">Via Discord</button>
+                        <button type="submit" class="btn">Via Email</button>
                     </div>
                     <div id="status"></div>
                 </form>
@@ -229,12 +227,12 @@
 
     <footer>
         <p><strong style="color:var(--accent)">RAPTORU_</strong></p>
-        <p style="margin:12px 0">
+        <p style="margin:10px 0">
             <a href="https://www.twitch.tv/raptoru_" target="_blank">Twitch</a>
             <a href="https://www.tiktok.com/@raptor_aigri" target="_blank">TikTok</a>
-            <a href="https://discord.gg/sfy6aB9abz" target="_blank" class="discord-link">Discord</a>
+            <a href="https://discord.gg/sfy6aB9abz" target="_blank" class="dc">Discord</a>
         </p>
-        <p style="font-size:0.7rem;margin-top:15px">© 2026 Raptoru_ • Tous droits réservés</p>
+        <p style="font-size:0.65rem;margin-top:12px">© 2026 Raptoru_ • Tous droits réservés</p>
     </footer>
 
     <script>
@@ -261,7 +259,7 @@
 
         function card(f,size){
             const s=dir(f)+'/'+f,g=f.endsWith('.gif'),v=f.endsWith('.mp4'),l=f.replace(/\.\w+$/,'');
-            const cls=size==='sm'?'card card-sm':'card';
+            const cls=size==='sm'?'card card-sm stagger':'card stagger';
             if(g)return`<div class="${cls}" onclick="openLB('${s}',0)"><img class="card-media" src="${s}" alt="${l}" onerror="this.parentElement.style.display='none'"><div class="card-label">${l}</div></div>`;
             if(v)return`<div class="${cls}" onmouseenter="hoverIn(this)" onmouseleave="hoverOut(this)" onclick="openLB('${s}',1)"><video class="card-media" muted loop playsinline preload="metadata"><source src="${s}"></video><div class="preview-bar"></div><div class="card-label">${l}</div></div>`;
             return`<div class="${cls}" onclick="openLB('${s}',0)"><img class="card-media" src="${s}" alt="${l}" onerror="this.parentElement.style.display='none'"><div class="card-label">${l}</div></div>`;
@@ -269,6 +267,7 @@
 
         function fill(id,arr,size){document.getElementById(id).innerHTML=arr.map(f=>card(f,size)).join('')}
 
+        let totalProjects=0;
         function init(){
             fill('g-badges-evo',F.badgesEvo,'sm');
             fill('g-badges-col',F.badgesCol,'sm');
@@ -284,44 +283,70 @@
             fill('g-trans-motion',F.transMotion,'md');
             fill('g-trans-anim',F.transAnim,'md');
             fill('g-gallery',F.gallery,'lg');
+
+            // Count projects
+            totalProjects=Object.values(F).reduce((a,b)=>a+b.length,0);
+            document.getElementById('totalCount').textContent=totalProjects;
+            document.getElementById('catCount').textContent='6';
+
             initReveal();
+            initStagger();
             initParallax();
             initPianoGlow();
         }
 
-        // PIANO GLOW - automatic sweep across grids
+        // PIANO GLOW on card borders
         function initPianoGlow(){
-            const glowLines=document.querySelectorAll('.glow-line');
-            let currentIndex=0;
-            function triggerGlow(){
-                if(glowLines.length===0)return;
-                const line=glowLines[currentIndex];
-                // Only glow if visible on screen
-                const rect=line.getBoundingClientRect();
+            const grids=document.querySelectorAll('.grid-sm,.grid-md');
+            let gridIndex=0;
+            function sweepGrid(){
+                if(grids.length===0)return;
+                const grid=grids[gridIndex];
+                const rect=grid.getBoundingClientRect();
+                // Only if visible
                 if(rect.top<window.innerHeight&&rect.bottom>0){
-                    line.classList.remove('glowing');
-                    void line.offsetWidth; // force reflow
-                    line.classList.add('glowing');
-                    setTimeout(()=>line.classList.remove('glowing'),2500);
+                    const cards=grid.querySelectorAll('.card');
+                    cards.forEach((card,i)=>{
+                        setTimeout(()=>{
+                            card.classList.add('glow-active');
+                            card.classList.remove('glow-fade');
+                            setTimeout(()=>{
+                                card.classList.remove('glow-active');
+                                card.classList.add('glow-fade');
+                                setTimeout(()=>card.classList.remove('glow-fade'),1000);
+                            },300);
+                        },i*150);
+                    });
                 }
-                currentIndex=(currentIndex+1)%glowLines.length;
-                // Random delay between 3-7 seconds
-                const nextDelay=3000+Math.random()*4000;
-                setTimeout(triggerGlow,nextDelay);
+                gridIndex=(gridIndex+1)%grids.length;
+                setTimeout(sweepGrid,4000+Math.random()*5000);
             }
-            setTimeout(triggerGlow,2000);
+            setTimeout(sweepGrid,3000);
         }
 
         // PARALLAX
         function initParallax(){
             const bg=document.getElementById('parallaxBg');
             window.addEventListener('scroll',()=>{
-                const scrolled=window.pageYOffset;
-                const header=document.getElementById('hero');
-                if(scrolled<header.offsetHeight){
-                    bg.style.transform='translateY('+scrolled*0.3+'px)';
-                }
+                const s=window.pageYOffset;
+                if(s<800)bg.style.transform='translateY('+s*0.3+'px)';
             },{passive:true});
+        }
+
+        // STAGGERED CARD REVEAL
+        function initStagger(){
+            const obs=new IntersectionObserver((entries)=>{
+                entries.forEach(e=>{
+                    if(e.isIntersecting){
+                        const cards=e.target.querySelectorAll('.stagger');
+                        cards.forEach((c,i)=>{
+                            setTimeout(()=>c.classList.add('visible'),i*80);
+                        });
+                        obs.unobserve(e.target);
+                    }
+                });
+            },{threshold:0.1});
+            document.querySelectorAll('.grid-sm,.grid-md,.grid-lg').forEach(g=>obs.observe(g));
         }
 
         // VIDEO HOVER PREVIEW
@@ -361,7 +386,7 @@
                 i.style.display='none';v.style.display='block';mb.style.display='block';
                 v.src=s;v.muted=true;v.play();
                 mb.textContent='🔇 Son';
-            } else {
+            }else{
                 v.style.display='none';v.pause();mb.style.display='none';
                 i.style.display='block';i.src=s;
             }
