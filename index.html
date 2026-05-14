@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPTORU_Test5 - Creative Studio</title>
+    <title>RAPTORU_Test6 - Creative Studio</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{--accent:#00d4d4;--bg:#050505;--card:#111;--border:#1a1a1a;--text:#e0e0e0;--dim:#666}
         body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
         ::selection{background:var(--accent);color:#000}
 
-        /* ANIMATED BG */
-        .bg-pulse{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-        .bg-pulse .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.06;animation:drift 25s ease-in-out infinite}
-        .bg-pulse .orb:nth-child(1){width:600px;height:600px;background:var(--accent);top:-10%;left:20%;animation-delay:0s}
-        .bg-pulse .orb:nth-child(2){width:400px;height:400px;background:var(--accent);bottom:10%;right:10%;animation-delay:-8s;animation-duration:30s}
-        .bg-pulse .orb:nth-child(3){width:300px;height:300px;background:#0088aa;top:50%;left:60%;animation-delay:-15s;animation-duration:20s}
-        @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(40px,-30px) scale(1.1)}50%{transform:translate(-20px,50px) scale(0.95)}75%{transform:translate(30px,20px) scale(1.05)}}
-
-        /* Fine grid overlay */
-        .bg-grid{position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(0,212,212,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,212,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+        /* ANIMATED BG - Aurore boréale subtile */
+        .bg-aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+        .bg-aurora .wave{position:absolute;width:200%;height:300px;opacity:0.035;filter:blur(80px);animation:aurora 20s ease-in-out infinite}
+        .bg-aurora .wave:nth-child(1){background:linear-gradient(90deg,transparent,#00d4d4,#0088aa,transparent);top:15%;left:-50%;animation-duration:22s}
+        .bg-aurora .wave:nth-child(2){background:linear-gradient(90deg,transparent,#0088aa,#00d4d4,transparent);top:45%;left:-30%;animation-duration:28s;animation-delay:-5s}
+        .bg-aurora .wave:nth-child(3){background:linear-gradient(90deg,transparent,#005566,#00d4d4,transparent);top:75%;left:-40%;animation-duration:25s;animation-delay:-12s}
+        @keyframes aurora{0%,100%{transform:translateX(-20%) skewY(-2deg)}50%{transform:translateX(20%) skewY(2deg)}}
 
         /* HEADER - PARALLAX */
         header{position:relative;height:100vh;max-height:750px;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -32,11 +29,13 @@
         .header-content h1{font-size:clamp(2.8rem,8vw,5rem);font-weight:900;letter-spacing:-2px;margin:25px 0 12px;background:linear-gradient(135deg,#fff 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp 0.8s ease 0.1s both}
         .tagline{font-size:1rem;color:var(--accent);letter-spacing:3px;text-transform:uppercase;font-weight:600;animation:fadeUp 0.8s ease 0.2s both}
         .bio{font-size:0.9rem;color:var(--dim);margin-top:12px;animation:fadeUp 0.8s ease 0.3s both}
-        .header-cta{margin-top:35px;display:flex;gap:15px;justify-content:center;animation:fadeUp 0.8s ease 0.4s both}
+        .header-cta{margin-top:35px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.8s ease 0.4s both}
         .header-cta a{padding:10px 28px;border:1.5px solid var(--accent);color:var(--accent);text-decoration:none;border-radius:4px;font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
         .header-cta a:hover{background:var(--accent);color:#000}
         .header-cta a.filled{background:var(--accent);color:#000}
         .header-cta a.filled:hover{background:transparent;color:var(--accent)}
+        .header-cta a.discord{border-color:#5865F2;color:#5865F2}
+        .header-cta a.discord:hover{background:#5865F2;color:#fff}
         .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;animation:bounce 2s infinite}
         @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
@@ -59,13 +58,15 @@
         .sub-header{margin:25px 0 15px;font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:600;padding-left:2px}
 
         /* GRIDS */
-        .grid-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-bottom:30px;position:relative}
-        .grid-md{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:30px}
+        .grid-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-bottom:30px;position:relative;overflow:visible}
+        .grid-md{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:30px;position:relative;overflow:visible}
         .grid-lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;margin-bottom:30px}
 
-        /* BADGE GLOW EFFECT */
-        .grid-sm{--glow-x:0;--glow-opacity:0}
-        .grid-sm::before{content:'';position:absolute;top:-10px;bottom:-10px;left:var(--glow-x);width:120px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,212,212,0.12),transparent 70%);opacity:var(--glow-opacity);pointer-events:none;transition:opacity 0.6s ease;z-index:0}
+        /* PIANO GLOW */
+        .glow-line{position:relative}
+        .glow-line::after{content:'';position:absolute;top:-5px;bottom:-5px;width:150px;background:radial-gradient(ellipse,rgba(0,212,212,0.15),transparent 70%);opacity:0;pointer-events:none;z-index:0;transition:opacity 0.8s ease;left:0}
+        .glow-line.glowing::after{animation:pianoSweep 2s ease-in-out forwards}
+        @keyframes pianoSweep{0%{left:-150px;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
 
         /* CARDS */
         .card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.25s ease;position:relative;z-index:1}
@@ -91,6 +92,7 @@
         /* CONTACT */
         .contact-wrap{max-width:500px;margin:60px auto;padding:35px;background:var(--card);border:1px solid var(--border);border-radius:8px}
         .contact-wrap h2{font-size:1rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:25px;font-weight:700}
+        .contact-note{font-size:0.75rem;color:var(--dim);margin-bottom:20px;line-height:1.6;font-style:italic}
         .field{margin-bottom:18px}
         .field label{display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:6px;font-weight:600}
         .field input,.field textarea{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-family:inherit;font-size:0.9rem;transition:border 0.3s}
@@ -108,6 +110,7 @@
         footer p{color:var(--dim);font-size:0.8rem;margin:5px 0}
         footer a{color:var(--accent);text-decoration:none;font-weight:600;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;margin:0 12px;transition:opacity 0.3s}
         footer a:hover{opacity:0.7}
+        footer a.discord-link{color:#5865F2}
 
         /* SCROLL ANIMATIONS */
         .reveal{opacity:0;transform:translateY(25px);transition:all 0.6s ease}
@@ -120,17 +123,18 @@
             .grid-md{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
             .grid-lg{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
             .btn-row{grid-template-columns:1fr}
+            .header-cta{gap:10px}
+            .header-cta a{padding:8px 18px;font-size:0.75rem}
         }
     </style>
 </head>
 <body>
-    <!-- Animated background -->
-    <div class="bg-pulse">
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
+    <!-- Aurore boréale -->
+    <div class="bg-aurora">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
     </div>
-    <div class="bg-grid"></div>
 
     <header id="hero">
         <div class="header-bg" id="parallaxBg"></div>
@@ -143,6 +147,7 @@
             <div class="header-cta">
                 <a href="#portfolio" class="filled" onclick="showPage(event,'portfolio')">Portfolio</a>
                 <a href="#contact" onclick="showPage(event,'contact')">Contact</a>
+                <a href="https://discord.gg/sfy6aB9abz" target="_blank" class="discord">Discord</a>
             </div>
         </div>
         <div class="scroll-hint">↓ scroll</div>
@@ -159,38 +164,38 @@
         <div id="portfolio" class="page active">
             <div class="cat-header reveal"><h2>Badges</h2><div class="line"></div></div>
             <div class="sub-header reveal">Évolutif</div>
-            <div class="grid-sm reveal" id="g-badges-evo" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
+            <div class="grid-sm glow-line reveal" id="g-badges-evo"></div>
             <div class="sub-header reveal">Couleur</div>
-            <div class="grid-sm reveal" id="g-badges-col" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
+            <div class="grid-sm glow-line reveal" id="g-badges-col"></div>
             <div class="sub-header reveal">Différents</div>
-            <div class="grid-sm reveal" id="g-badges-diff" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
+            <div class="grid-sm glow-line reveal" id="g-badges-diff"></div>
 
             <div class="cat-header reveal"><h2>Emotes</h2><div class="line"></div></div>
             <div class="sub-header reveal">Fixe</div>
-            <div class="grid-sm reveal" id="g-emotes-fix" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
+            <div class="grid-sm glow-line reveal" id="g-emotes-fix"></div>
             <div class="sub-header reveal">Animée</div>
-            <div class="grid-sm reveal" id="g-emotes-anim" onmousemove="glowMove(event,this)" onmouseleave="glowOut(this)"></div>
+            <div class="grid-sm glow-line reveal" id="g-emotes-anim"></div>
 
             <div class="cat-header reveal"><h2>Asset Twitch</h2><div class="line"></div></div>
             <div class="sub-header reveal">Overlay</div>
-            <div class="grid-md reveal" id="g-overlay"></div>
+            <div class="grid-md glow-line reveal" id="g-overlay"></div>
             <div class="sub-header reveal">Écran d'attente</div>
-            <div class="grid-md reveal" id="g-ecran"></div>
+            <div class="grid-md glow-line reveal" id="g-ecran"></div>
             <div class="sub-header reveal">Alerte Raid</div>
-            <div class="grid-md reveal" id="g-raid"></div>
+            <div class="grid-md glow-line reveal" id="g-raid"></div>
             <div class="sub-header reveal">Alerte Follow</div>
-            <div class="grid-md reveal" id="g-follow"></div>
+            <div class="grid-md glow-line reveal" id="g-follow"></div>
             <div class="sub-header reveal">Alerte Sub</div>
-            <div class="grid-md reveal" id="g-sub"></div>
+            <div class="grid-md glow-line reveal" id="g-sub"></div>
 
             <div class="cat-header reveal"><h2>Alertes Animées</h2><div class="line"></div></div>
-            <div class="grid-md reveal" id="g-alertes-anim"></div>
+            <div class="grid-md glow-line reveal" id="g-alertes-anim"></div>
 
             <div class="cat-header reveal"><h2>Transitions</h2><div class="line"></div></div>
             <div class="sub-header reveal">Motion Design</div>
-            <div class="grid-md reveal" id="g-trans-motion"></div>
+            <div class="grid-md glow-line reveal" id="g-trans-motion"></div>
             <div class="sub-header reveal">Transition Animée</div>
-            <div class="grid-md reveal" id="g-trans-anim"></div>
+            <div class="grid-md glow-line reveal" id="g-trans-anim"></div>
 
             <div class="cat-header reveal"><h2>Galerie</h2><div class="line"></div></div>
             <div class="grid-lg reveal" id="g-gallery"></div>
@@ -200,10 +205,11 @@
             <div class="cat-header"><h2>Contact</h2><div class="line"></div></div>
             <div class="contact-wrap">
                 <h2>Envoyez-moi un message</h2>
+                <p class="contact-note">N'oubliez pas de laisser un moyen pour que je puisse vous répondre (email, Discord, Twitter...)</p>
                 <form id="contactForm">
-                    <div class="field"><label>Nom</label><input type="text" id="name" required></div>
-                    <div class="field"><label>Email</label><input type="email" id="email" required></div>
-                    <div class="field"><label>Message</label><textarea id="message" required></textarea></div>
+                    <div class="field"><label>Pseudo / Nom</label><input type="text" id="name" placeholder="Comment vous appeler ?" required></div>
+                    <div class="field"><label>Email</label><input type="email" id="email" placeholder="votre@email.com" required></div>
+                    <div class="field"><label>Message</label><textarea id="message" placeholder="Votre message..." required></textarea></div>
                     <div class="btn-row">
                         <button type="button" class="btn" onclick="sendDiscord()">Discord</button>
                         <button type="submit" class="btn">Email</button>
@@ -226,8 +232,9 @@
         <p style="margin:12px 0">
             <a href="https://www.twitch.tv/raptoru_" target="_blank">Twitch</a>
             <a href="https://www.tiktok.com/@raptor_aigri" target="_blank">TikTok</a>
+            <a href="https://discord.gg/sfy6aB9abz" target="_blank" class="discord-link">Discord</a>
         </p>
-        <p style="font-size:0.7rem;margin-top:15px">© 2024 Raptoru_ • Tous droits réservés</p>
+        <p style="font-size:0.7rem;margin-top:15px">© 2026 Raptoru_ • Tous droits réservés</p>
     </footer>
 
     <script>
@@ -279,17 +286,30 @@
             fill('g-gallery',F.gallery,'lg');
             initReveal();
             initParallax();
+            initPianoGlow();
         }
 
-        // GLOW effect on badge grids
-        function glowMove(e,grid){
-            const rect=grid.getBoundingClientRect();
-            const x=e.clientX-rect.left;
-            grid.style.setProperty('--glow-x',x+'px');
-            grid.style.setProperty('--glow-opacity','1');
-        }
-        function glowOut(grid){
-            grid.style.setProperty('--glow-opacity','0');
+        // PIANO GLOW - automatic sweep across grids
+        function initPianoGlow(){
+            const glowLines=document.querySelectorAll('.glow-line');
+            let currentIndex=0;
+            function triggerGlow(){
+                if(glowLines.length===0)return;
+                const line=glowLines[currentIndex];
+                // Only glow if visible on screen
+                const rect=line.getBoundingClientRect();
+                if(rect.top<window.innerHeight&&rect.bottom>0){
+                    line.classList.remove('glowing');
+                    void line.offsetWidth; // force reflow
+                    line.classList.add('glowing');
+                    setTimeout(()=>line.classList.remove('glowing'),2500);
+                }
+                currentIndex=(currentIndex+1)%glowLines.length;
+                // Random delay between 3-7 seconds
+                const nextDelay=3000+Math.random()*4000;
+                setTimeout(triggerGlow,nextDelay);
+            }
+            setTimeout(triggerGlow,2000);
         }
 
         // PARALLAX
@@ -380,7 +400,7 @@
         function sendDiscord(){
             const n=document.getElementById('name').value,e=document.getElementById('email').value,m=document.getElementById('message').value;
             if(!n||!e||!m){showSt('Remplis tous les champs!',0);return}
-            fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'📩 Contact',color:55508,fields:[{name:'Nom',value:n,inline:1},{name:'Email',value:e,inline:1},{name:'Message',value:m}]}]})
+            fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'📩 Contact Portfolio',color:55508,fields:[{name:'Pseudo/Nom',value:n,inline:1},{name:'Email',value:e,inline:1},{name:'Message',value:m}]}]})
             }).then(()=>{showSt('Envoyé sur Discord!',1);document.getElementById('contactForm').reset()}).catch(()=>showSt('Erreur',0));
         }
         document.getElementById('contactForm').onsubmit=e=>{
