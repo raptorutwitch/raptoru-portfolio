@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPTORU_Test9 - Creative Studio</title>
+    <title>RAPTORU_ • Animateur 2D & Motion Designer</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{--accent:#00d4d4;--bg:#050505;--card:#0c0c0c;--border:#1a1a1a;--text:#e0e0e0;--dim:#555}
@@ -126,6 +126,40 @@
             .btn-row{grid-template-columns:1fr}
             .stats-bar{gap:15px;font-size:0.6rem}
         }
+
+        /* ===== PAGE CV ===== */
+        .cv-wrap{max-width:1100px;margin:0 auto;padding:0 20px 60px}
+        .cv-intro{text-align:center;margin-bottom:40px}
+        .cv-intro h2{font-size:clamp(2rem,6vw,3.2rem);font-weight:900;letter-spacing:-1px;margin-bottom:8px;background:linear-gradient(135deg,#fff 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .cv-role{color:var(--accent);letter-spacing:3px;text-transform:uppercase;font-size:0.8rem;font-weight:600;margin-bottom:18px}
+        .cv-accroche{max-width:680px;margin:0 auto 20px;color:var(--text);font-size:0.95rem;line-height:1.7;opacity:0.85}
+        .cv-accroche b{color:var(--accent);font-weight:600}
+        .cv-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+        .cv-tags span{font-size:0.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 13px;border:1px solid var(--accent);color:var(--accent);border-radius:30px}
+        .cv-cols{display:grid;grid-template-columns:1.6fr 1fr;gap:40px;align-items:start}
+        .cv-sec{font-size:0.85rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:28px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+        .cv-sec:first-child{margin-top:0}
+        .cv-item{margin-bottom:20px;padding-left:16px;border-left:2px solid var(--border);transition:border-color 0.3s}
+        .cv-item:hover{border-left-color:var(--accent)}
+        .cv-it-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+        .cv-it-title{font-weight:700;font-size:0.98rem;color:#fff}
+        .cv-when{font-size:0.7rem;font-weight:600;color:var(--accent);background:rgba(0,212,212,0.08);padding:2px 9px;border-radius:20px;white-space:nowrap}
+        .cv-where{font-size:0.8rem;color:var(--dim);margin:3px 0 6px;font-weight:600}
+        .cv-item p{font-size:0.85rem;line-height:1.6;color:var(--text);opacity:0.8}
+        .cv-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+        .cv-stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+        .cv-stat b{display:block;font-size:1.5rem;font-weight:900;color:var(--accent);line-height:1}
+        .cv-stat span{font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-top:4px;display:block}
+        .cv-skill{margin-bottom:12px}
+        .cv-skill span{font-size:0.82rem;font-weight:600;display:block;margin-bottom:5px}
+        .cv-bar{height:7px;background:var(--border);border-radius:10px;overflow:hidden}
+        .cv-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#0891b2);border-radius:10px}
+        .cv-chips{display:flex;flex-wrap:wrap;gap:7px}
+        .cv-chips span{font-size:0.75rem;font-weight:600;padding:5px 12px;border-radius:20px;background:var(--card);border:1px solid var(--border);color:var(--text)}
+        .cv-chips span.on{background:var(--accent);color:#000;border-color:var(--accent)}
+        .cv-contact-btn{display:block;text-align:center;margin-top:28px;padding:14px;background:var(--accent);color:#000;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:0.8rem;border-radius:8px;text-decoration:none;transition:all 0.3s}
+        .cv-contact-btn:hover{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+        @media(max-width:768px){.cv-cols{grid-template-columns:1fr;gap:10px}}
     </style>
 </head>
 <body>
@@ -141,6 +175,7 @@
             <p class="bio">Créateur de contenu • Disponible pour commandes</p>
             <div class="header-cta">
                 <a href="#portfolio" class="filled" onclick="showPage(event,'portfolio')">Portfolio</a>
+                <a href="#cv" onclick="showPage(event,'cv')">CV</a>
                 <a href="#contact" onclick="showPage(event,'contact')">Contact</a>
                 <a href="https://discord.gg/sfy6aB9abz" target="_blank" class="discord">Discord</a>
             </div>
@@ -151,6 +186,7 @@
     <nav class="sticky-nav">
         <div class="sticky-nav-inner">
             <button class="active" onclick="showPage(event,'portfolio')">Portfolio</button>
+            <button onclick="showPage(event,'cv')">CV</button>
             <button onclick="showPage(event,'contact')">Contact</button>
         </div>
     </nav>
@@ -197,6 +233,101 @@
 
             <div class="cat-header reveal"><div class="cat-title">Galerie</div><div class="cat-line"></div></div>
             <div class="grid-lg reveal" id="g-gallery"></div>
+        </div>
+
+        <div id="cv" class="page">
+            <div class="cat-header"><div class="cat-num">▤</div><div class="cat-title">Curriculum Vitae</div><div class="cat-line"></div></div>
+
+            <div class="cv-wrap">
+                <div class="cv-intro">
+                    <h2>Antoni Cherafa</h2>
+                    <p class="cv-role">Animateur 2D · Motion Designer · Graphiste</p>
+                    <p class="cv-accroche">Animateur 2D et motion designer, biberonné à <b>Dofus</b> et <b>Wakfu</b>. 5 ans à animer et habiller du contenu pour des créateurs. Je cherche à rejoindre un studio dont l'univers me fait vibrer, pour grandir vers l'<b>animation et les FX de jeu</b>.</p>
+                    <div class="cv-tags">
+                        <span>Disponible</span><span>Mobilité France</span><span>Permis B</span><span>Anglais B2</span>
+                    </div>
+                </div>
+
+                <div class="cv-cols">
+                    <div class="cv-main">
+                        <h3 class="cv-sec">Expériences</h3>
+
+                        <div class="cv-item">
+                            <div class="cv-it-top"><span class="cv-it-title">Graphiste &amp; motion — Freelance</span><span class="cv-when">2022 → auj.</span></div>
+                            <div class="cv-where">Indépendant · une vingtaine de créateurs</div>
+                            <p>Création d'emotes (fixes &amp; animées), d'alertes sub/follow et de transitions en motion design pour des streamers. Du croquis à l'export final (After Effects, Clip Studio Paint, Premiere Pro).</p>
+                        </div>
+
+                        <div class="cv-item">
+                            <div class="cv-it-top"><span class="cv-it-title">Graphiste attitré — NHS</span><span class="cv-when">depuis 2022</span></div>
+                            <div class="cv-where">Créateur de contenu Rocket League</div>
+                            <p>Direction visuelle complète depuis ses débuts : emotes, alertes sub/follow, identité de chaîne. Conception de sa mascotte, déclinée jusqu'en peluche.</p>
+                        </div>
+
+                        <div class="cv-item">
+                            <div class="cv-it-top"><span class="cv-it-title">Identité visuelle complète — Ma chaîne</span><span class="cv-when">Projet perso</span></div>
+                            <div class="cv-where">Direction artistique de A à Z</div>
+                            <p>Création intégrale de l'habillage de ma propre chaîne : emotes, badges, alertes, transitions. Tout est conçu, dessiné et animé par mes soins — un univers visuel cohérent de bout en bout.</p>
+                        </div>
+
+                        <div class="cv-item">
+                            <div class="cv-it-top"><span class="cv-it-title">Streamer — Twitch</span><span class="cv-when">2022 → auj.</span></div>
+                            <div class="cv-where">1800+ followers · création en direct</div>
+                            <p>Chaîne variée et lieu d'échange : gaming, dessin en live et habillage maison. Une vitrine de mon univers et un vrai laboratoire créatif au contact d'une communauté.</p>
+                        </div>
+
+                        <div class="cv-item">
+                            <div class="cv-it-top"><span class="cv-it-title">Créateur de format court — TikTok</span><span class="cv-when">2022 → auj.</span></div>
+                            <div class="cv-where">700+ abonnés · contenu humoristique Dofus</div>
+                            <p>Vidéos courtes et humoristiques sur Dofus : écriture, montage et habillage de A à Z. +630 abonnés en 2-3 mois sur la lancée.</p>
+                        </div>
+
+                        <h3 class="cv-sec">Formation</h3>
+                        <div class="cv-item">
+                            <div class="cv-it-top"><span class="cv-it-title">Licence Art, Design, Science &amp; Technique</span><span class="cv-when">2019–2022</span></div>
+                            <div class="cv-where">Option Cinéma d'Animation · ISCID, Montauban</div>
+                        </div>
+                        <div class="cv-item">
+                            <div class="cv-it-top"><span class="cv-it-title">Baccalauréat Scientifique — spé SVT</span><span class="cv-when">2016</span></div>
+                            <div class="cv-where">Lycée du Castella, Pamiers</div>
+                        </div>
+                    </div>
+
+                    <div class="cv-side">
+                        <h3 class="cv-sec">En bref</h3>
+                        <div class="cv-stats">
+                            <div class="cv-stat"><b>5 ans</b><span>de pratique</span></div>
+                            <div class="cv-stat"><b>~20</b><span>clients</span></div>
+                            <div class="cv-stat"><b>1800+</b><span>followers</span></div>
+                            <div class="cv-stat"><b>B2</b><span>anglais</span></div>
+                        </div>
+
+                        <h3 class="cv-sec">Compétences</h3>
+                        <div class="cv-skill"><span>Animation 2D</span><div class="cv-bar"><i style="width:65%"></i></div></div>
+                        <div class="cv-skill"><span>Motion design (After Effects)</span><div class="cv-bar"><i style="width:65%"></i></div></div>
+                        <div class="cv-skill"><span>Montage vidéo</span><div class="cv-bar"><i style="width:58%"></i></div></div>
+                        <div class="cv-skill"><span>FX / animation de jeu</span><div class="cv-bar"><i style="width:40%"></i></div></div>
+                        <div class="cv-skill"><span>Illustration numérique</span><div class="cv-bar"><i style="width:40%"></i></div></div>
+
+                        <h3 class="cv-sec">Outils</h3>
+                        <div class="cv-chips">
+                            <span class="on">After Effects</span><span class="on">Clip Studio Paint</span><span class="on">Premiere Pro</span><span>Photoshop</span><span>Illustrator</span>
+                        </div>
+
+                        <h3 class="cv-sec">Centres d'intérêt</h3>
+                        <div class="cv-chips">
+                            <span>Jeux vidéo</span><span>Doublage</span><span>Anime &amp; manga</span><span>Cinéma d'animation</span>
+                        </div>
+
+                        <h3 class="cv-sec">Qualités</h3>
+                        <div class="cv-chips">
+                            <span>Créatif</span><span>Autonome</span><span>Débrouillard</span><span>Curieux</span><span>Passionné</span>
+                        </div>
+
+                        <a class="cv-contact-btn" href="#contact" onclick="showPage(event,'contact')">📩 Me contacter</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="contact" class="page">
@@ -426,6 +557,8 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.sticky-nav button').forEach(b=>b.classList.remove('active'));
             if(e&&e.target&&e.target.tagName==='BUTTON')e.target.classList.add('active');
+            var sb=document.querySelector('.stats-bar');
+            if(sb)sb.style.display=(id==='portfolio')?'':'none';
             window.scrollTo({top:document.querySelector('.sticky-nav').offsetTop,behavior:'smooth'});
         }
 
