@@ -249,20 +249,42 @@
             raid:['Alerte raid exemple.mp4'],
             follow:['Dofus Alerte.mp4','Template Alerte follow.mp4'],
             sub:['Jerry Smith.mp4'],
-            alertesAnim:['Rick&Morty_1.mp4','Eeau Anim.mp4','RB Classic.mp4','Nuage Classique.mp4','Nuage Rouge.mp4','CSC.mp4'],
+            alertesAnim:['Pub Tiktok Sacrieuse.mp4','Rick&Morty_1.mp4','Eeau Anim.mp4','RB Classic.mp4','Nuage Classique.mp4','Nuage Rouge.mp4','CSC.mp4'],
             transMotion:['Appareil photo exemple 2.mp4','Cercle exemple.mp4','Page exemple.mp4','Pixel Exemple.mp4','Rectangle.mp4'],
             transAnim:['transi portail.mp4','Transi  snk.mp4','Transition Feu.mp4','Video Terre.mp4','Video Wind.mp4','Vidéo Eau.mp4'],
             gallery:['test bannière discord.png','C21TTS.gif','Mikasatts.gif','Daki.png','Ayanokoji PPClair.png','Coqueline Discord.png','Qilby Avatar 3 .png']
         };
 
+        // Labels affichés UNIQUEMENT pour les emotes et badges.
+        // Toute entrée absente de cet objet n'affiche aucun sous-titre.
+        const LABELS={
+            // Badges évolutifs
+            '1Racine et détruit.png':'Racine','2Abimé et sale.png':'Abîmé','3.png':'Usé','4.png':'Propre','5Flashy.png':'Flashy',
+            // Badges couleur
+            'Bleu.png':'Bleu','Jaune.png':'Jaune','Rose.png':'Rose','rouge.png':'Rouge','Multicolor.png':'Multicolore',
+            // Badges différents
+            '1. UglyTitan.png':'Titan 1','2. CartTtian.png':'Titan 2','5. ArmoredTitan.png':'Titan 3','6. ColossalTitan.png':'Titan 4','7. BeastTitan.png':'Titan 5',
+            // Emotes fixes
+            'Waaah.png':'Waaah','Flex megumin.png':'Flex','Roooh.png':'Roooh','Grrr séance UV.png':'Grrr','Raptor sadge Fixed.png':'Sadge',
+            // Emotes animées
+            'AhooV2.gif':'Ahoo','Kirby_Fixed.gif':'Kirby','Boude.gif':'Boude','HelloKnight_.gif':'Hello Knight','Bobombe Finale.gif':'Bobombe'
+        };
+
         function dir(f){return f.endsWith('.mp4')||f.endsWith('.gif')?'videos':'images'}
+        function thumb(f){return 'thumbs/'+f.replace(/\.mp4$/,'.jpg')}
 
         function card(f,size){
             const s=dir(f)+'/'+f,g=f.endsWith('.gif'),v=f.endsWith('.mp4'),l=f.replace(/\.\w+$/,'');
             const cls=size==='sm'?'card card-sm stagger':'card stagger';
-            if(g)return`<div class="${cls}" onclick="openLB('${s}',0)"><img class="card-media" src="${s}" alt="${l}" onerror="this.parentElement.style.display='none'"><div class="card-label">${l}</div></div>`;
-            if(v)return`<div class="${cls}" onmouseenter="hoverIn(this)" onmouseleave="hoverOut(this)" onclick="openLB('${s}',1)"><video class="card-media" muted loop playsinline preload="metadata"><source src="${s}"></video><div class="preview-bar"></div><div class="card-label">${l}</div></div>`;
-            return`<div class="${cls}" onclick="openLB('${s}',0)"><img class="card-media" src="${s}" alt="${l}" onerror="this.parentElement.style.display='none'"><div class="card-label">${l}</div></div>`;
+            // Le sous-titre ne s'affiche que pour les emotes/badges (présents dans LABELS)
+            const labelTxt=LABELS[f];
+            const labelHtml=labelTxt?`<div class="card-label">${labelTxt}</div>`:'';
+            if(v){
+                const p=thumb(f);
+                return`<div class="${cls}" onmouseenter="hoverIn(this)" onmouseleave="hoverOut(this)" onclick="openLB('${s}',1)"><video class="card-media" muted loop playsinline preload="none" poster="${p}"><source src="${s}"></video><div class="preview-bar"></div>${labelHtml}</div>`;
+            }
+            // images & gifs
+            return`<div class="${cls}" onclick="openLB('${s}',0)"><img class="card-media" src="${s}" alt="${l}" loading="lazy" onerror="this.parentElement.style.display='none'">${labelHtml}</div>`;
         }
 
         function fill(id,arr,size){document.getElementById(id).innerHTML=arr.map(f=>card(f,size)).join('')}
