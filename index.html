@@ -153,7 +153,7 @@
         .cv-skill{margin-bottom:12px}
         .cv-skill span{font-size:0.82rem;font-weight:600;display:block;margin-bottom:5px}
         .cv-bar{height:7px;background:var(--border);border-radius:10px;overflow:hidden}
-        .cv-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#0891b2);border-radius:10px}
+        .cv-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#0891b2);border-radius:10px;transition:width 1.1s cubic-bezier(0.22,1,0.36,1)}
         .cv-chips{display:flex;flex-wrap:wrap;gap:7px}
         .cv-chips span{font-size:0.75rem;font-weight:600;padding:5px 12px;border-radius:20px;background:var(--card);border:1px solid var(--border);color:var(--text)}
         .cv-chips span.on{background:var(--accent);color:#000;border-color:var(--accent)}
@@ -303,11 +303,11 @@
                         </div>
 
                         <h3 class="cv-sec">Compétences</h3>
-                        <div class="cv-skill"><span>Animation 2D</span><div class="cv-bar"><i style="width:65%"></i></div></div>
-                        <div class="cv-skill"><span>Motion design (After Effects)</span><div class="cv-bar"><i style="width:65%"></i></div></div>
-                        <div class="cv-skill"><span>Montage vidéo</span><div class="cv-bar"><i style="width:58%"></i></div></div>
-                        <div class="cv-skill"><span>FX / animation de jeu</span><div class="cv-bar"><i style="width:40%"></i></div></div>
-                        <div class="cv-skill"><span>Illustration numérique</span><div class="cv-bar"><i style="width:40%"></i></div></div>
+                        <div class="cv-skill"><span>Animation 2D</span><div class="cv-bar"><i data-w="65%"></i></div></div>
+                        <div class="cv-skill"><span>Motion design (After Effects)</span><div class="cv-bar"><i data-w="65%"></i></div></div>
+                        <div class="cv-skill"><span>Montage vidéo</span><div class="cv-bar"><i data-w="58%"></i></div></div>
+                        <div class="cv-skill"><span>FX / animation de jeu</span><div class="cv-bar"><i data-w="40%"></i></div></div>
+                        <div class="cv-skill"><span>Illustration numérique</span><div class="cv-bar"><i data-w="40%"></i></div></div>
 
                         <h3 class="cv-sec">Outils</h3>
                         <div class="cv-chips">
@@ -559,7 +559,16 @@
             if(e&&e.target&&e.target.tagName==='BUTTON')e.target.classList.add('active');
             var sb=document.querySelector('.stats-bar');
             if(sb)sb.style.display=(id==='portfolio')?'':'none';
+            if(id==='cv')animCvBars();
             window.scrollTo({top:document.querySelector('.sticky-nav').offsetTop,behavior:'smooth'});
+        }
+        function animCvBars(){
+            var bars=document.querySelectorAll('#cv .cv-bar i');
+            bars.forEach(function(b){b.style.width='0'});
+            // petit délai pour que le navigateur enregistre le reset avant d'animer
+            setTimeout(function(){
+                bars.forEach(function(b){b.style.width=b.getAttribute('data-w')});
+            },120);
         }
 
         // SCROLL REVEAL
